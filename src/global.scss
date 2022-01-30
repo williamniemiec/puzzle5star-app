@@ -27,8 +27,16 @@
 
 .container {
     padding: 20px;
+    background-image: url("/assets/images/background/standard.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
+ion-title,
+ion-back-button {
+    --color: var(--ion-color-primary-contrast);
+}
 
 ion-toolbar {
     --background:  var(--ion-color-primary);

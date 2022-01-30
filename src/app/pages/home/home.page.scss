@@ -1,0 +1,15 @@
+.area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+}
+
+
