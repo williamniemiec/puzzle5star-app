@@ -10,14 +10,14 @@ import { MenuController } from '@ionic/angular';
 
 
 /**
- * Responsible for representing home page.
+ * Responsible for representing about page.
  */
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss']
+  selector: 'app-about',
+  templateUrl: './about.page.html',
+  styleUrls: ['./about.page.scss']
 })
-export class HomePage {
+export class AboutPage {
 
   //---------------------------------------------------------------------------
   //		Attributes
@@ -28,25 +28,5 @@ export class HomePage {
   //		Constructor
   //---------------------------------------------------------------------------
   constructor(public router: Router) {
-  }
-
-
-  //---------------------------------------------------------------------------
-  //		Methods
-  //---------------------------------------------------------------------------
-  public handleHowToPlay() {
-    this.redirectTo('/how-to-play');
-  }
-
-  public handlePlay() {
-    this.redirectTo('/play');
-  }
-
-  public handleAbout() {
-    this.redirectTo('/about');
-  }
-
-  private redirectTo(url: string) {
-    this.router.navigateByUrl(url);
   }
 }
