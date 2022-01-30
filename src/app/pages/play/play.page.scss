@@ -1,3 +1,10 @@
+.area {
+  display: flex;
+  height: 93%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .star {
     display: flex;
     justify-content: center;
