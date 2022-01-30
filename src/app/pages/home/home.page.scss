@@ -1,0 +1,60 @@
+.star {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+  
+#a {
+  margin-left: -90px;
+}
+
+#b {
+  margin-left: -75px;
+  margin-top: 60px;
+}
+
+#c {
+  margin-left: -10px;
+  margin-top: 67px;
+}
+
+#d {
+  margin-left: -66px;
+  margin-top: 95px;
+}
+
+#e {
+  margin-left: -50px;
+  margin-top: 168px;
+}
+
+#f {
+  margin-left: -110px;
+  margin-top: 120px;
+}
+
+#g {
+  margin-left: -180px;
+  margin-top: 155px;
+}
+
+#h {
+  margin-left: -150px;
+  margin-top: 95px;
+}
+
+#i {
+  margin-left: -200px;
+  margin-top: 55px;
+}
+
+#j {
+  margin-left: -125px;
+  margin-top: 58px;
+}
+
+.star-node {
+  position: absolute;
+  border-radius: 10px;
+  padding: 5px;
+}
