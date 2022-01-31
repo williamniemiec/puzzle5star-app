@@ -52,6 +52,7 @@ export class PlayPage implements AfterViewInit {
     //context.fillRect(0, 0, 400, 300);
     context.translate(100, 100);
     context.strokeStyle = '#f7c11e';
+    context.lineWidth = 3;
     this.draw5Star(context);
     context.stroke();
     
