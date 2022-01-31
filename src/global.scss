@@ -42,20 +42,9 @@ ion-toolbar {
     --background:  var(--ion-color-primary);
 }
 
-
-.app-bar .icon {
-
-}
-
-.app-bar .title {
-    margin: 0;
-    margin-left: 10px;
-    color: black;
-}
-
 .panel {
-    background-color: white;
-    color: black;
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);;
     border-radius: 5px;
     padding: 20px;
 }
