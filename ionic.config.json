@@ -1,5 +1,7 @@
 {
   "name": "puzzle-5star",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

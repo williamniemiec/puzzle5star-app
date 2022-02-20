@@ -1,5 +1,8 @@
 {
     "EASY": "Easy",
     "MEDIUM": "Medium",
-    "HARD": "Hard"
+    "HARD": "Hard",
+    "SOLVE": "Solve",
+    "RESET": "Reset",
+    "PLAY": "Play"
 }

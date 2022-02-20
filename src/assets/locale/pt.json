@@ -1,5 +1,8 @@
 {
     "EASY": "Fácil",
     "MEDIUM": "Médio",
-    "HARD": "Difícil"
+    "HARD": "Difícil",
+    "SOLVE": "Resolver",
+    "RESET": "Reiniciar",
+    "PLAY": "Jogar"
 }

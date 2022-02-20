@@ -12,6 +12,7 @@ import { MenuController, ModalController } from '@ionic/angular';
 import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
 import {Location} from '@angular/common'; 
 import { CountdownComponent } from 'ngx-countdown';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Responsible for controlling play page.
@@ -39,6 +40,10 @@ export class PlayPage implements AfterViewInit {
   public config: CountdownConfig = { format: `mm:ss`, leftTime: 1 };
   public p_bar_value: number = 1;
   public progressBarUpdate;
+  public PLAY;
+  public RESET;
+  public SOLVE;
+  private language;
 
   public nodes = {
     "A": { marked: false, available: true, selected: false },
@@ -61,7 +66,9 @@ export class PlayPage implements AfterViewInit {
     public router: Router,
     private routeParams: ActivatedRoute,
     public star5puzzleService: Star5PuzzleService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private translate: TranslateService
+    
   ) {
     this.message = "Mark 9 points"
   }
@@ -70,9 +77,23 @@ export class PlayPage implements AfterViewInit {
     this._CANVAS = this.canvasEl.nativeElement;
     this._CANVAS.width = 200;
     this._CANVAS.height = 200;
+    this.renderText();
     this.loadLevel();
     this.draw();
   }
+
+  private renderText(): void {
+    this.translate.get('PLAY').subscribe((res: string) => {
+      this.PLAY = res;
+    });
+    this.translate.get('RESET').subscribe((res: string) => {
+      this.RESET = res;
+    });
+    this.translate.get('SOLVE').subscribe((res: string) => {
+      this.SOLVE = res;
+    });
+  }
+
 
   private loadLevel() {
     const level = this.routeParams.snapshot.params.level;
