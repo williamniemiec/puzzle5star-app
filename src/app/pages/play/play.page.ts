@@ -1,3 +1,4 @@
+import { Star5PuzzleService } from './../../services/star5puzzle.service';
 import { 
     Component, 
     ElementRef,
@@ -10,7 +11,7 @@ import { MenuController } from '@ionic/angular';
 
 
 /**
- * Responsible for representing play page.
+ * Responsible for controlling play page.
  */
 @Component({
   selector: 'app-play',
@@ -29,12 +30,35 @@ export class PlayPage implements AfterViewInit {
   public dy = 0; 
   public radius = 100;
   public dig = 10;
+  public message = "";
+  private selectedNode = "";
+  public nodes = {
+    "A": { marked: false, available: true, isSelected: () => this.isSelected("A") },
+    "B": { marked: false, available: true, isSelected: () => this.isSelected("B") },
+    "C": { marked: false, available: true, isSelected: () => this.isSelected("C") },
+    "D": { marked: false, available: true, isSelected: () => this.isSelected("D") },
+    "E": { marked: false, available: true, isSelected: () => this.isSelected("E") },
+    "F": { marked: false, available: true, isSelected: () => this.isSelected("F")},
+    "G": { marked: false, available: true, isSelected: () => this.isSelected("G") },
+    "H": { marked: false, available: true, isSelected: () => this.isSelected("H") },
+    "I": { marked: false, available: true, isSelected: () => this.isSelected("I") },
+    "J": { marked: false, available: true, isSelected: () => this.isSelected("J") },
+  };
 
 
   //---------------------------------------------------------------------------
   //		Constructor
   //---------------------------------------------------------------------------
-  constructor(public router: Router) {
+  constructor(
+    public router: Router,
+    public star5puzzleService: Star5PuzzleService
+  ) {
+    this.nodes['D'].marked = true;
+    this.message = "Mark 9 points"
+  }
+
+  isSelected(nodeLabel: string) {
+    return (this.selectedNode === nodeLabel);
   }
 
   ngAfterViewInit() {
@@ -44,7 +68,7 @@ export class PlayPage implements AfterViewInit {
     this.draw();
   }
 
-  draw() {
+  private draw() {
     
     //var context = canvas.getContext('2d');
     var context = this._CANVAS.getContext('2d');
@@ -59,7 +83,7 @@ export class PlayPage implements AfterViewInit {
 
   }
 
-  draw5Star(context) { 
+  private draw5Star(context) { 
     context.beginPath();
     var x = this.radius * Math.sin(Math.PI / 5) + this.dx;
     var y = this.radius * Math.cos(Math.PI / 5) + this.dy;
@@ -75,5 +99,27 @@ export class PlayPage implements AfterViewInit {
 
     context.closePath();
 
+  }
+
+  public handleNodeSelect(nodeLabel: string): void {
+    console.log('CLICOU NO NODO ' + nodeLabel);
+    
+    for (let label of Object.keys(this.nodes)) {
+      if (!this.nodes[label].marked) {
+        this.nodes[label].available = false;
+        this.nodes[label].selected = false;
+      }
+    }
+
+    this.selectedNode = nodeLabel;
+    this.nodes['H'].available = true;
+  }
+
+  public handleSolve(): void {
+
+  }
+
+  public handleReset(): void {
+    
   }
 }

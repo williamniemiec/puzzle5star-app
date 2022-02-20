@@ -13,7 +13,9 @@
   <div class="container">
     <div class="area">
       <div class="panel message">
-        <p>Mark 9 points</p>
+        <p>
+          {{message}}
+        </p>
       </div>
 
       <div class="star">
@@ -21,20 +23,157 @@
           <canvas #canvas>
             Your browser does not support the canvas!
           </canvas>
-          <button class="star-node" id="a">A</button>
-          <button class="star-node" id="b">B</button>
-          <button class="star-node" id="c">C</button>
-          <button class="star-node" id="d">D</button>
-          <button class="star-node" id="e">E</button>
-          <button class="star-node" id="f">F</button>
-          <button class="star-node" id="g">G</button>
-          <button class="star-node" id="h">H</button>
-          <button class="star-node" id="i">I</button>
-          <button class="star-node" id="j">J</button>
+          <button 
+            class="star-node" 
+            id="a" 
+            (click)="handleNodeSelect('A')" 
+            [disabled]="!nodes['A'].available"
+            [ngClass]="[
+              nodes['A'].available ? 'available' : 'unavailable', 
+              nodes['A'].isSelected() ? 'selected' : '', 
+              nodes['A'].marked ? 'marked' : ''
+            ]"
+          >
+            A
+          </button>
+          <button 
+            class="star-node" 
+            id="b" 
+            (click)="handleNodeSelect('B')" 
+            [disabled]="!nodes['B'].available"
+            [ngClass]="[
+              nodes['B'].available ? 'available' : 'unavailable', 
+              nodes['B'].isSelected() ? 'selected' : '', 
+              nodes['B'].marked ? 'marked' : ''
+            ]"
+          >
+            B
+          </button>
+          <button 
+            class="star-node" 
+            id="c" 
+            (click)="handleNodeSelect('C')" 
+            [disabled]="!nodes['C'].available"
+            [ngClass]="[
+              nodes['C'].available ? 'available' : 'unavailable', 
+              nodes['C'].isSelected() ? 'selected' : '', 
+              nodes['C'].marked ? 'marked' : ''
+            ]"
+          >
+            C
+          </button>
+          <button 
+            class="star-node" 
+            id="d" 
+            (click)="handleNodeSelect('D')" 
+            [disabled]="!nodes['D'].available"
+            [ngClass]="[
+              nodes['D'].available ? 'available' : 'unavailable', 
+              nodes['D'].isSelected() ? 'selected' : '', 
+              nodes['D'].marked ? 'marked' : ''
+            ]"
+          >
+            D
+          </button>
+          <button 
+            class="star-node" 
+            id="e" 
+            (click)="handleNodeSelect('E')" 
+            [disabled]="!nodes['E'].available"
+            [ngClass]="[
+              nodes['E'].available ? 'available' : 'unavailable', 
+              nodes['E'].isSelected() ? 'selected' : '', 
+              nodes['E'].marked ? 'marked' : ''
+            ]"
+          >
+            E
+          </button>
+          <button 
+            class="star-node" 
+            id="f" 
+            (click)="handleNodeSelect('F')" 
+            [disabled]="!nodes['F'].available"
+            [ngClass]="[
+              nodes['F'].available ? 'available' : 'unavailable', 
+              nodes['F'].isSelected() ? 'selected' : '', 
+              nodes['F'].marked ? 'marked' : ''
+            ]"
+          >
+            F
+          </button>
+          <button 
+            class="star-node" 
+            id="g" 
+            (click)="handleNodeSelect('G')" 
+            [disabled]="!nodes['G'].available"
+            [ngClass]="[
+              nodes['G'].available ? 'available' : 'unavailable', 
+              nodes['G'].isSelected() ? 'selected' : '', 
+              nodes['G'].marked ? 'marked' : ''
+            ]"
+          >
+            G
+          </button>
+          <button 
+            class="star-node" 
+            id="h" 
+            (click)="handleNodeSelect('H')" 
+            [disabled]="!nodes['H'].available"
+            [ngClass]="[
+              nodes['H'].available ? 'available' : 'unavailable', 
+              nodes['H'].isSelected() ? 'selected' : '', 
+              nodes['H'].marked ? 'marked' : ''
+            ]"
+          >
+            H
+          </button>
+          <button 
+            class="star-node" 
+            id="i" 
+            (click)="handleNodeSelect('I')" 
+            [disabled]="!nodes['I'].available"
+            [ngClass]="[
+              nodes['I'].available ? 'available' : 'unavailable', 
+              nodes['I'].isSelected() ? 'selected' : '', 
+              nodes['I'].marked ? 'marked' : ''
+            ]"
+          >
+            I
+          </button>
+          <button 
+            class="star-node" 
+            id="j" 
+            (click)="handleNodeSelect('J')" 
+            [disabled]="!nodes['J'].available"
+            [ngClass]="[
+              nodes['J'].available ? 'available' : 'unavailable', 
+              nodes['J'].isSelected() ? 'selected' : '', 
+              nodes['J'].marked ? 'marked' : ''
+            ]"
+          >
+            J
+          </button>
         </div>
       </div>
 
-      <ion-button color="secondary" expand="full" class="theme-button">Reset</ion-button>
+      <div class="actions">
+        <ion-button 
+          color="secondary" 
+          expand="full" 
+          class="theme-button"
+          (click)="handleSolve()"
+        >
+          Solve
+        </ion-button>
+        <ion-button 
+          color="secondary" 
+          expand="full" 
+          class="theme-button"
+          (click)="handleReset()"
+        >
+          Reset
+        </ion-button>
+      </div>
     </div>
   </div>
 </ion-content>

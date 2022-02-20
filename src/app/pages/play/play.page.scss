@@ -66,8 +66,29 @@
     width: 25px;
     height: 25px;
     text-align: center;
+    font-weight: bold;
     
     background-color: var(--ion-color-primary);
     color: var(--ion-color-primary-contrast);
-    border: 3px solid var(--ion-color-secondary);
+    border: 3px solid var(--ion-color-primary);
   }
+
+.available {
+  border-color: var(--ion-color-success);
+}
+
+.unavailable {
+  border-color: var(--ion-color-danger);
+}
+
+.selected {
+  border-color: var(--ion-color-secondary);
+  background-color: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+}
+
+.marked {
+  border-color: var(--ion-color-secondary);
+  background-color: var(--ion-color-secondary);
+  color: var(--ion-color-secondary-contrast);
+}

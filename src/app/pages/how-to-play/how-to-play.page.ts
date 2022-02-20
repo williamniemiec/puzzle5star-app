@@ -17,16 +17,25 @@ import { MenuController } from '@ionic/angular';
   templateUrl: './how-to-play.page.html',
   styleUrls: ['./how-to-play.page.scss']
 })
-export class HowToPlayPage {
+export class HowToPlayPage implements OnInit {
 
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
+  public howToPlayDescription = "";
 
 
   //---------------------------------------------------------------------------
   //		Constructor
   //---------------------------------------------------------------------------
   constructor(public router: Router) {
+  }
+
+
+  //---------------------------------------------------------------------------
+  //		Methods
+  //---------------------------------------------------------------------------
+  ngOnInit(): void {
+      this.howToPlayDescription = "O problema consiste em, a partir de um ponto de partida escolhido livremente por um usuário entre os 10 disponíveis marcar outro ponto distante de um ponto deste em linha reta (ambos pontos não devem ainda ainda estarem marcados), O objetivo é marcar o maior número possível de pontos (que são 9). O ponto de passagem independe de marcação.";
   }
 }
