@@ -36,7 +36,7 @@ export class PlayPage implements AfterViewInit {
   public dig = 10;
   public message = "";
   public hasTimer = true;
-  public config: CountdownConfig = { format: `mm:ss`, leftTime: 70 };
+  public config: CountdownConfig = { format: `mm:ss`, leftTime: 1 };
   
   public nodes = {
     "A": { marked: false, available: true, selected: false },
@@ -76,7 +76,7 @@ export class PlayPage implements AfterViewInit {
     const level = this.routeParams.snapshot.params.level;
 
     console.log('Level selected: ', level);
-    this.config = { format: `mm:ss`, leftTime: 2 };
+    this.config = { format: `mm:ss`, leftTime: 10 };
     this.countdown.begin();
   }
 
@@ -124,12 +124,16 @@ export class PlayPage implements AfterViewInit {
   }
 
   public handleSolve(): void {
-
+    alert('Not implemented yet!');
   }
 
   public handleReset(): void {
     this.presentModal().then((modalDataResponse) => {
-      this.router.navigate(['/play/', modalDataResponse.data], {replaceUrl: true});
+      if (modalDataResponse.data != null) {
+        this.router.navigate(['/'], {replaceUrl: true}).then(() => {
+          this.router.navigate(['/play/', modalDataResponse.data], {replaceUrl: true})
+        })
+      }
     });
   }
 
@@ -146,6 +150,10 @@ export class PlayPage implements AfterViewInit {
   }
 
   public handleEvent(event) {
-    console.log('CLOCK EVENT', event);
+    if (event.action === 'done') {
+      console.log('CLOCK EVENT', event);
+      alert('Time expired!');
+      this.router.navigate(['/'], {replaceUrl: true})
+    }
   }
 }

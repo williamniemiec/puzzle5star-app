@@ -52,7 +52,9 @@ export class HomePage {
   
   public handlePlay() {
     this.presentModal().then((modalDataResponse) => {
-      this.redirectTo('/play/' + modalDataResponse.data);
+      if (modalDataResponse.data != null) {
+        this.redirectTo('/play/' + modalDataResponse.data);
+      }
     });
   }
 
