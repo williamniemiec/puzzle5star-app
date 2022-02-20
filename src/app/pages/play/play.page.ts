@@ -6,10 +6,10 @@ import {
     OnInit, 
     AfterViewInit
   } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController, ModalController } from '@ionic/angular';
 import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
-
+import {Location} from '@angular/common'; 
 
 /**
  * Responsible for controlling play page.
@@ -52,6 +52,7 @@ export class PlayPage implements AfterViewInit {
   //---------------------------------------------------------------------------
   constructor(
     public router: Router,
+    private routeParams: ActivatedRoute,
     public star5puzzleService: Star5PuzzleService,
     public modalController: ModalController
   ) {
@@ -62,7 +63,14 @@ export class PlayPage implements AfterViewInit {
     this._CANVAS = this.canvasEl.nativeElement;
     this._CANVAS.width = 200;
     this._CANVAS.height = 200;
+    this.loadLevel();
     this.draw();
+  }
+
+  private loadLevel() {
+    const level = this.routeParams.snapshot.params.level;
+
+    console.log('Level selected: ', level);
   }
 
   private draw() {
@@ -113,23 +121,20 @@ export class PlayPage implements AfterViewInit {
   }
 
   public handleReset(): void {
-    this.presentModal();
+    this.presentModal().then((modalDataResponse) => {
+      this.router.navigate(['/play/', modalDataResponse.data], {replaceUrl: true});
+    });
   }
 
-  async presentModal() {
+  private async presentModal(): Promise<any> {
     const modal = await this.modalController.create({
       component: LevelSelectionPage,
       componentProps: {
       }
     });
 
-    modal.onDidDismiss().then((modalDataResponse) => {
-      if (modalDataResponse !== null) {
-        let response = modalDataResponse.data;
-        console.log('Modal Sent Data : '+ response);
-      }
-    });
+    await modal.present();
 
-    return await modal.present();
+    return modal.onDidDismiss();
   }
 }

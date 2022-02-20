@@ -30,7 +30,7 @@ const routes: Routes = [
     )
   },
   {
-    path: 'play',
+    path: 'play/:level',
     loadChildren: () => (
       import('./pages/play/play.module')
         .then(m => m.PlayPageModule)
@@ -46,7 +46,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(
       routes, 
-      { preloadingStrategy: PreloadAllModules }
+      { 
+        preloadingStrategy: PreloadAllModules
+      }
     )
   ],
   exports: [RouterModule]

@@ -6,7 +6,8 @@ import {
     AfterViewInit
   } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
+import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
 
 
 /**
@@ -27,7 +28,10 @@ export class HomePage {
   //---------------------------------------------------------------------------
   //		Constructor
   //---------------------------------------------------------------------------
-  constructor(public router: Router) {
+  constructor(
+    public router: Router,
+    private modalController: ModalController
+  ) {
   }
 
 
@@ -38,15 +42,29 @@ export class HomePage {
     this.redirectTo('/how-to-play');
   }
 
-  public handlePlay() {
-    this.redirectTo('/play');
+  private redirectTo(url: string) {
+    this.router.navigateByUrl(url);
   }
 
   public handleAbout() {
     this.redirectTo('/about');
   }
+  
+  public handlePlay() {
+    this.presentModal().then((modalDataResponse) => {
+      this.redirectTo('/play/' + modalDataResponse.data);
+    });
+  }
 
-  private redirectTo(url: string) {
-    this.router.navigateByUrl(url);
+  private async presentModal(): Promise<any> {
+    const modal = await this.modalController.create({
+      component: LevelSelectionPage,
+      componentProps: {
+      }
+    });
+
+    await modal.present();
+
+    return modal.onDidDismiss();
   }
 }

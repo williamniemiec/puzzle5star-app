@@ -2,7 +2,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { NgModule } from '@angular/core';
 import { HomePage} from './home.page';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 
 
 /**
@@ -14,6 +14,9 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     IonicModule,
     HomePageRoutingModule
+  ],
+  providers: [
+    ModalController
   ]
 })
 export class HomePageModule {

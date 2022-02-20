@@ -22,14 +22,14 @@ export class LevelSelectionPage implements OnInit {
    }
 
   public async handleEasyLevel(): Promise<void> {
-    this.modalController.dismiss("EASY");
+    this.modalController.dismiss("easy");
   }
 
   public async handleMediumLevel(): Promise<void> {
-    this.modalController.dismiss("MEDIUM");
+    this.modalController.dismiss("medium");
   }
 
   public async handleHardLevel(): Promise<void> {
-    this.modalController.dismiss("HARD");
+    this.modalController.dismiss("hard");
   }
 }
