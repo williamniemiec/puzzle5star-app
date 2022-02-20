@@ -1,3 +1,4 @@
+import { CountdownConfig } from './../../../../node_modules/ngx-countdown/interfaces.d';
 import { Star5PuzzleService } from './../../services/star5puzzle.service';
 import { 
     Component, 
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController, ModalController } from '@ionic/angular';
 import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
 import {Location} from '@angular/common'; 
+import { CountdownComponent } from 'ngx-countdown';
 
 /**
  * Responsible for controlling play page.
@@ -25,6 +27,7 @@ export class PlayPage implements AfterViewInit {
   //		Attributes
   //---------------------------------------------------------------------------
   @ViewChild('canvas') canvasEl : ElementRef;
+  @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
   private _CANVAS  : any;
   //private _CONTEXT : any;
   private dx = 0; 
@@ -32,6 +35,8 @@ export class PlayPage implements AfterViewInit {
   public radius = 100;
   public dig = 10;
   public message = "";
+  public hasTimer = true;
+  public config: CountdownConfig = { format: `mm:ss`, leftTime: 70 };
   
   public nodes = {
     "A": { marked: false, available: true, selected: false },
@@ -71,6 +76,8 @@ export class PlayPage implements AfterViewInit {
     const level = this.routeParams.snapshot.params.level;
 
     console.log('Level selected: ', level);
+    this.config = { format: `mm:ss`, leftTime: 2 };
+    this.countdown.begin();
   }
 
   private draw() {
@@ -136,5 +143,9 @@ export class PlayPage implements AfterViewInit {
     await modal.present();
 
     return modal.onDidDismiss();
+  }
+
+  public handleEvent(event) {
+    console.log('CLOCK EVENT', event);
   }
 }

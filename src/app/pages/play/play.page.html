@@ -20,6 +20,10 @@
         </div>
       </ng-container>
 
+      <ng-container *ngIf="hasTimer">
+        <countdown #cd [config]="config" (event)="handleEvent($event)"></countdown>
+      </ng-container>
+
       <div class="star">
         <div class="ion-canvas">
           <canvas #canvas>
