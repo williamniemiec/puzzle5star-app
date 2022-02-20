@@ -94,5 +94,12 @@
 }
 
 countdown {
-  color: white;
+  text-align: center;
+  font-weight: bold;
+  color: var(--ion-color-secondary);
+}
+
+ion-progress-bar {
+  --background: rgba(var(--ion-color-secondary-rgb), 0.3);
+  --progress-background: var(--ion-color-secondary);
 }

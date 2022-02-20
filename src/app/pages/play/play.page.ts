@@ -37,7 +37,9 @@ export class PlayPage implements AfterViewInit {
   public message = "";
   public hasTimer = true;
   public config: CountdownConfig = { format: `mm:ss`, leftTime: 1 };
-  
+  public p_bar_value: number = 1;
+  public progressBarUpdate;
+
   public nodes = {
     "A": { marked: false, available: true, selected: false },
     "B": { marked: false, available: true, selected: false },
@@ -78,6 +80,11 @@ export class PlayPage implements AfterViewInit {
     console.log('Level selected: ', level);
     this.config = { format: `mm:ss`, leftTime: 10 };
     this.countdown.begin();
+    
+    this.progressBarUpdate = setInterval(() => {
+      this.p_bar_value = this.countdown.left / (1000*this.config.leftTime);
+    }, 1000);
+    
   }
 
   private draw() {
@@ -152,8 +159,10 @@ export class PlayPage implements AfterViewInit {
   public handleEvent(event) {
     if (event.action === 'done') {
       console.log('CLOCK EVENT', event);
-      alert('Time expired!');
-      this.router.navigate(['/'], {replaceUrl: true})
+      clearInterval(this.progressBarUpdate);
+      this.p_bar_value = 0
+      //alert('Time expired!');
+      //this.router.navigate(['/'], {replaceUrl: true})
     }
   }
 }

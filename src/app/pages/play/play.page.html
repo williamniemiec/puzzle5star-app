@@ -22,6 +22,11 @@
 
       <ng-container *ngIf="hasTimer">
         <countdown #cd [config]="config" (event)="handleEvent($event)"></countdown>
+        <ion-progress-bar 
+          [value]="p_bar_value" 
+          *ngIf="hasTimer"
+          >
+      </ion-progress-bar>
       </ng-container>
 
       <div class="star">
