@@ -1,25 +1,23 @@
-import { Star5PuzzleService } from './../../services/star5puzzle.service';
-import { PlayPageRoutingModule } from './play-routing.module';
 import { NgModule } from '@angular/core';
-import { PlayPage} from './play.page';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
+import { LevelSelectionPage } from './level-selection.page';
+import { LevelSelectionPageRoutingModule } from './level-selection-routing.module';
 
 
 /**
  * Responsible for managing home page context.
  */
 @NgModule({
-  declarations: [PlayPage],
+  declarations: [LevelSelectionPage],
   imports: [
     CommonModule,
     IonicModule,
-    PlayPageRoutingModule
+    LevelSelectionPageRoutingModule
   ],
   providers: [
-    Star5PuzzleService,
     ModalController
   ]
 })
-export class PlayPageModule {
+export class LevelSelectionPageModule {
 }

@@ -7,7 +7,8 @@ import {
     AfterViewInit
   } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
+import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
 
 
 /**
@@ -31,18 +32,18 @@ export class PlayPage implements AfterViewInit {
   public radius = 100;
   public dig = 10;
   public message = "";
-  private selectedNode = "";
+  
   public nodes = {
-    "A": { marked: false, available: true, isSelected: () => this.isSelected("A") },
-    "B": { marked: false, available: true, isSelected: () => this.isSelected("B") },
-    "C": { marked: false, available: true, isSelected: () => this.isSelected("C") },
-    "D": { marked: false, available: true, isSelected: () => this.isSelected("D") },
-    "E": { marked: false, available: true, isSelected: () => this.isSelected("E") },
-    "F": { marked: false, available: true, isSelected: () => this.isSelected("F")},
-    "G": { marked: false, available: true, isSelected: () => this.isSelected("G") },
-    "H": { marked: false, available: true, isSelected: () => this.isSelected("H") },
-    "I": { marked: false, available: true, isSelected: () => this.isSelected("I") },
-    "J": { marked: false, available: true, isSelected: () => this.isSelected("J") },
+    "A": { marked: false, available: true, selected: false },
+    "B": { marked: false, available: true, selected: false },
+    "C": { marked: false, available: true, selected: false },
+    "D": { marked: false, available: true, selected: false },
+    "E": { marked: false, available: true, selected: false },
+    "F": { marked: false, available: true, selected: false },
+    "G": { marked: false, available: true, selected: false },
+    "H": { marked: false, available: true, selected: false },
+    "I": { marked: false, available: true, selected: false },
+    "J": { marked: false, available: true, selected: false },
   };
 
 
@@ -51,14 +52,10 @@ export class PlayPage implements AfterViewInit {
   //---------------------------------------------------------------------------
   constructor(
     public router: Router,
-    public star5puzzleService: Star5PuzzleService
+    public star5puzzleService: Star5PuzzleService,
+    public modalController: ModalController
   ) {
-    this.nodes['D'].marked = true;
     this.message = "Mark 9 points"
-  }
-
-  isSelected(nodeLabel: string) {
-    return (this.selectedNode === nodeLabel);
   }
 
   ngAfterViewInit() {
@@ -102,17 +99,13 @@ export class PlayPage implements AfterViewInit {
   }
 
   public handleNodeSelect(nodeLabel: string): void {
-    console.log('CLICOU NO NODO ' + nodeLabel);
-    
-    for (let label of Object.keys(this.nodes)) {
-      if (!this.nodes[label].marked) {
-        this.nodes[label].available = false;
-        this.nodes[label].selected = false;
-      }
-    }
+    this.star5puzzleService.selectStar(nodeLabel);
 
-    this.selectedNode = nodeLabel;
-    this.nodes['H'].available = true;
+    for (let label of Object.keys(this.nodes)) {
+      this.nodes[label].available = this.star5puzzleService.isAvailable(label);
+      this.nodes[label].selected = this.star5puzzleService.isSelected(label);
+      this.nodes[label].isMarked = this.star5puzzleService.isMarked(label);
+    }
   }
 
   public handleSolve(): void {
@@ -120,6 +113,23 @@ export class PlayPage implements AfterViewInit {
   }
 
   public handleReset(): void {
-    
+    this.presentModal();
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: LevelSelectionPage,
+      componentProps: {
+      }
+    });
+
+    modal.onDidDismiss().then((modalDataResponse) => {
+      if (modalDataResponse !== null) {
+        let response = modalDataResponse.data;
+        console.log('Modal Sent Data : '+ response);
+      }
+    });
+
+    return await modal.present();
   }
 }

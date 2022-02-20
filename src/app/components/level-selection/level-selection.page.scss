@@ -1,0 +1,13 @@
+
+
+.levels {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50vh;
+}
+
+.level {
+    height: 90%;
+    flex: 1;
+}

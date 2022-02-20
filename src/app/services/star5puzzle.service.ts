@@ -8,11 +8,11 @@ import { Injectable } from "@angular/core";
   { providedIn: 'root' }
 )
 export class Star5PuzzleService {
-
+  
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  //private 
+  private selectedNode = "";
 
 
   //---------------------------------------------------------------------------
@@ -27,6 +27,23 @@ export class Star5PuzzleService {
   //		Methods
   //---------------------------------------------------------------------------
   public selectStar(label: string): void {
-    // ...
+    if (this.isSelected(label)) {
+      this.selectedNode = "";
+    }
+    else {
+      this.selectedNode = label;
+    }
+  }
+
+  public isSelected(label: string): any {
+    return (this.selectedNode === label);
+  }
+
+  public isMarked(label: string): boolean {
+    return false;
+  }
+  
+  public isAvailable(label: string): boolean {
+    return true;
   }
 }

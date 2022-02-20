@@ -12,11 +12,13 @@
 
   <div class="container">
     <div class="area">
-      <div class="panel message">
-        <p>
-          {{message}}
-        </p>
-      </div>
+      <ng-container *ngIf="message.length > 0">
+        <div class="panel message">
+          <p>
+            {{message}}
+          </p>
+        </div>
+      </ng-container>
 
       <div class="star">
         <div class="ion-canvas">
@@ -30,7 +32,7 @@
             [disabled]="!nodes['A'].available"
             [ngClass]="[
               nodes['A'].available ? 'available' : 'unavailable', 
-              nodes['A'].isSelected() ? 'selected' : '', 
+              nodes['A'].selected ? 'selected' : '', 
               nodes['A'].marked ? 'marked' : ''
             ]"
           >
@@ -43,7 +45,7 @@
             [disabled]="!nodes['B'].available"
             [ngClass]="[
               nodes['B'].available ? 'available' : 'unavailable', 
-              nodes['B'].isSelected() ? 'selected' : '', 
+              nodes['B'].selected ? 'selected' : '', 
               nodes['B'].marked ? 'marked' : ''
             ]"
           >
@@ -56,7 +58,7 @@
             [disabled]="!nodes['C'].available"
             [ngClass]="[
               nodes['C'].available ? 'available' : 'unavailable', 
-              nodes['C'].isSelected() ? 'selected' : '', 
+              nodes['C'].selected ? 'selected' : '', 
               nodes['C'].marked ? 'marked' : ''
             ]"
           >
@@ -69,7 +71,7 @@
             [disabled]="!nodes['D'].available"
             [ngClass]="[
               nodes['D'].available ? 'available' : 'unavailable', 
-              nodes['D'].isSelected() ? 'selected' : '', 
+              nodes['D'].selected ? 'selected' : '', 
               nodes['D'].marked ? 'marked' : ''
             ]"
           >
@@ -82,7 +84,7 @@
             [disabled]="!nodes['E'].available"
             [ngClass]="[
               nodes['E'].available ? 'available' : 'unavailable', 
-              nodes['E'].isSelected() ? 'selected' : '', 
+              nodes['E'].selected ? 'selected' : '', 
               nodes['E'].marked ? 'marked' : ''
             ]"
           >
@@ -95,7 +97,7 @@
             [disabled]="!nodes['F'].available"
             [ngClass]="[
               nodes['F'].available ? 'available' : 'unavailable', 
-              nodes['F'].isSelected() ? 'selected' : '', 
+              nodes['F'].selected ? 'selected' : '', 
               nodes['F'].marked ? 'marked' : ''
             ]"
           >
@@ -108,7 +110,7 @@
             [disabled]="!nodes['G'].available"
             [ngClass]="[
               nodes['G'].available ? 'available' : 'unavailable', 
-              nodes['G'].isSelected() ? 'selected' : '', 
+              nodes['G'].selected ? 'selected' : '', 
               nodes['G'].marked ? 'marked' : ''
             ]"
           >
@@ -121,7 +123,7 @@
             [disabled]="!nodes['H'].available"
             [ngClass]="[
               nodes['H'].available ? 'available' : 'unavailable', 
-              nodes['H'].isSelected() ? 'selected' : '', 
+              nodes['H'].selected ? 'selected' : '', 
               nodes['H'].marked ? 'marked' : ''
             ]"
           >
@@ -134,7 +136,7 @@
             [disabled]="!nodes['I'].available"
             [ngClass]="[
               nodes['I'].available ? 'available' : 'unavailable', 
-              nodes['I'].isSelected() ? 'selected' : '', 
+              nodes['I'].selected ? 'selected' : '', 
               nodes['I'].marked ? 'marked' : ''
             ]"
           >
@@ -147,7 +149,7 @@
             [disabled]="!nodes['J'].available"
             [ngClass]="[
               nodes['J'].available ? 'available' : 'unavailable', 
-              nodes['J'].isSelected() ? 'selected' : '', 
+              nodes['J'].selected ? 'selected' : '', 
               nodes['J'].marked ? 'marked' : ''
             ]"
           >
