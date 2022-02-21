@@ -13,6 +13,8 @@ import { LevelSelectionPage } from 'src/app/components/level-selection/level-sel
 import {Location} from '@angular/common'; 
 import { CountdownComponent } from 'ngx-countdown';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertController } from '@ionic/angular';
+
 
 /**
  * Responsible for controlling play page.
@@ -67,8 +69,8 @@ export class PlayPage implements AfterViewInit {
     private routeParams: ActivatedRoute,
     public star5puzzleService: Star5PuzzleService,
     public modalController: ModalController,
-    private translate: TranslateService
-    
+    private translate: TranslateService,
+    private alertController: AlertController
   ) {
     this.message = "Mark 9 points"
   }
@@ -180,9 +182,23 @@ export class PlayPage implements AfterViewInit {
   public handleEvent(event) {
     if (event.action === 'done') {
       clearInterval(this.progressBarUpdate);
-      this.p_bar_value = 0
-      alert('Time expired!');
-      this.router.navigate(['/'], {replaceUrl: true})
+      this.p_bar_value = 0;
+      this.presentAlert().then(role => {
+        this.router.navigate(['/'], {replaceUrl: true})
+      })
     }
+  }
+
+  private async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'You lose!',
+      subHeader: 'Time expired',
+      message: 'Try to reduce difficulty',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    return alert.onDidDismiss();
   }
 }

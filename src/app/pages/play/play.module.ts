@@ -5,6 +5,7 @@ import { PlayPage} from './play.page';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CountdownModule } from 'ngx-countdown';
+import { AlertController } from '@ionic/angular';
 
 
 /**
@@ -20,7 +21,8 @@ import { CountdownModule } from 'ngx-countdown';
   ],
   providers: [
     Star5PuzzleService,
-    ModalController
+    ModalController,
+    AlertController
   ]
 })
 export class PlayPageModule {
