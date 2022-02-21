@@ -179,11 +179,10 @@ export class PlayPage implements AfterViewInit {
 
   public handleEvent(event) {
     if (event.action === 'done') {
-      console.log('CLOCK EVENT', event);
       clearInterval(this.progressBarUpdate);
       this.p_bar_value = 0
-      //alert('Time expired!');
-      //this.router.navigate(['/'], {replaceUrl: true})
+      alert('Time expired!');
+      this.router.navigate(['/'], {replaceUrl: true})
     }
   }
 }

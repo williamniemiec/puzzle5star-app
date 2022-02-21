@@ -53,8 +53,14 @@ ion-toolbar {
 .modal-default, .inner-scroll {
     --background: rgba(0,0,0,0.7) !important;
     --border-radius: 10px !important;
+    
 }
 
 .modal-content {
     --background: rgba(0,0,0,0.0) !important;
+    //max-height: 280px;
+}
+
+.levels, .modal-area, .modal {
+    height: 100%;
 }
