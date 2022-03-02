@@ -1,4 +1,6 @@
+import { LevelService } from './level.service';
 import { Injectable } from "@angular/core";
+import { GameSettings } from "../models/game-settings.model";
 
 
 /**
@@ -13,6 +15,7 @@ export class Star5PuzzleService {
   //		Attributes
   //---------------------------------------------------------------------------
   private selectedNode = "";
+  private levelService: LevelService;
 
 
   //---------------------------------------------------------------------------
@@ -20,12 +23,17 @@ export class Star5PuzzleService {
   //---------------------------------------------------------------------------
   constructor(
   ) {
+    this.levelService = new LevelService();
   }
 
 
   //---------------------------------------------------------------------------
   //		Methods
   //---------------------------------------------------------------------------
+  public newGame(level: string): GameSettings {
+    return this.levelService.getLevel(level);
+  }
+
   public selectStar(label: string): void {
     if (this.isSelected(label)) {
       this.selectedNode = "";

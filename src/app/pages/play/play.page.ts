@@ -1,19 +1,20 @@
 import { CountdownConfig } from './../../../../node_modules/ngx-countdown/interfaces.d';
 import { Star5PuzzleService } from './../../services/star5puzzle.service';
-import { 
-    Component, 
-    ElementRef,
-    ViewChild,
-    OnInit, 
-    AfterViewInit
-  } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  OnInit,
+  AfterViewInit
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController, ModalController } from '@ionic/angular';
 import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
-import {Location} from '@angular/common'; 
+import { Location } from '@angular/common';
 import { CountdownComponent } from 'ngx-countdown';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
+import { GameSettings } from "../../models/game-settings.model";
 
 
 /**
@@ -29,17 +30,17 @@ export class PlayPage implements AfterViewInit {
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  @ViewChild('canvas') canvasEl : ElementRef;
+  @ViewChild('canvas') canvasEl: ElementRef;
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
-  private _CANVAS  : any;
+  private _CANVAS: any;
   //private _CONTEXT : any;
-  private dx = 0; 
-  public dy = 0; 
+  private dx = 0;
+  public dy = 0;
   public radius = 100;
   public dig = 10;
-  public message = "";
-  public hasTimer = true;
-  public config: CountdownConfig = { format: `mm:ss`, leftTime: 1 };
+  public message;
+  public hasTimer;
+  public config: CountdownConfig;// = { format: `mm:ss`, leftTime: 1 };
   public p_bar_value: number = 1;
   public progressBarUpdate;
   public PLAY;
@@ -72,7 +73,9 @@ export class PlayPage implements AfterViewInit {
     private translate: TranslateService,
     private alertController: AlertController
   ) {
-    this.message = "Mark 9 points"
+    this.message = ""
+    this.hasTimer = true;
+    this.config = { format: `mm:ss`, leftTime: 1 };
   }
 
   ngAfterViewInit() {
@@ -99,19 +102,26 @@ export class PlayPage implements AfterViewInit {
 
   private loadLevel() {
     const level = this.routeParams.snapshot.params.level;
+    const gameConfig: GameSettings = this.star5puzzleService.newGame(level);
 
-    console.log('Level selected: ', level);
-    this.config = { format: `mm:ss`, leftTime: 10 };
-    this.countdown.begin();
-    
-    this.progressBarUpdate = setInterval(() => {
-      this.p_bar_value = this.countdown.left / (1000*this.config.leftTime);
-    }, 1000);
-    
+    this.message = gameConfig.message;
+
+    if (gameConfig.hasTimer) {
+      this.hasTimer = true;
+      this.config = { format: `mm:ss`, leftTime: gameConfig.timer};
+      this.countdown.begin();
+
+      this.progressBarUpdate = setInterval(() => {
+        this.p_bar_value = this.countdown.left / (1000 * this.config.leftTime);
+      }, 1000);
+    }
+    else {
+      this.hasTimer = false;
+    }
   }
 
   private draw() {
-    
+
     //var context = canvas.getContext('2d');
     var context = this._CANVAS.getContext('2d');
     //context.fillStyle = "#EEEEDD";
@@ -121,16 +131,16 @@ export class PlayPage implements AfterViewInit {
     context.lineWidth = 3;
     this.draw5Star(context);
     context.stroke();
-    
+
 
   }
 
-  private draw5Star(context) { 
+  private draw5Star(context) {
     context.beginPath();
     var x = this.radius * Math.sin(Math.PI / 5) + this.dx;
     var y = this.radius * Math.cos(Math.PI / 5) + this.dy;
 
-    context.moveTo(x, y); 
+    context.moveTo(x, y);
 
 
     for (var i = 1; i < 5; i++) {
@@ -160,8 +170,8 @@ export class PlayPage implements AfterViewInit {
   public handleReset(): void {
     this.presentModal().then((modalDataResponse) => {
       if (modalDataResponse.data != null) {
-        this.router.navigate(['/'], {replaceUrl: true}).then(() => {
-          this.router.navigate(['/play/', modalDataResponse.data], {replaceUrl: true})
+        this.router.navigate(['/'], { replaceUrl: true }).then(() => {
+          this.router.navigate(['/play/', modalDataResponse.data], { replaceUrl: true })
         })
       }
     });
@@ -179,12 +189,16 @@ export class PlayPage implements AfterViewInit {
     return modal.onDidDismiss();
   }
 
-  public handleEvent(event) {
+  public handleCountdownEvent(event) {
+    if (!this.hasTimer) {
+      return;
+    }
+
     if (event.action === 'done') {
       clearInterval(this.progressBarUpdate);
       this.p_bar_value = 0;
       this.presentAlert().then(role => {
-        this.router.navigate(['/'], {replaceUrl: true})
+        this.router.navigate(['/'], { replaceUrl: true })
       })
     }
   }
@@ -193,7 +207,7 @@ export class PlayPage implements AfterViewInit {
     const alert = await this.alertController.create({
       header: 'You lose!',
       subHeader: 'Time expired',
-      message: 'Try to reduce difficulty',
+      message: 'Try to reduce difficulty.',
       buttons: ['OK']
     });
 
