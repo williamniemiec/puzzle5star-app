@@ -43,6 +43,10 @@ export class PlayPage implements AfterViewInit {
   public PLAY: string;
   public RESET: string;
   public SOLVE: string;
+  private YOU_LOSE: string;
+  private TIME_EXPIRED: string;
+  private TRY_REDUCE_DIFFICULTY: string;
+  private OK: string;
   public nodes = {
     "A": { marked: false, available: true, selected: false },
     "B": { marked: false, available: true, selected: false },
@@ -93,6 +97,19 @@ export class PlayPage implements AfterViewInit {
     this.translate.get('SOLVE').subscribe((res: string) => {
       this.SOLVE = res;
     });
+    this.translate.get('YOU_LOSE').subscribe((res: string) => {
+      this.YOU_LOSE = res;
+    });
+    this.translate.get('TIME_EXPIRED').subscribe((res: string) => {
+      this.TIME_EXPIRED = res;
+    });
+    this.translate.get('TRY_REDUCE_DIFFICULTY').subscribe((res: string) => {
+      this.TRY_REDUCE_DIFFICULTY = res;
+    });
+    this.translate.get('OK').subscribe((res: string) => {
+      this.OK = res;
+    });
+
   }
 
   private loadLevel(): void {
@@ -175,10 +192,10 @@ export class PlayPage implements AfterViewInit {
 
   private async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'You lose!',
-      subHeader: 'Time expired',
-      message: 'Try to reduce difficulty.',
-      buttons: ['OK']
+      header: this.YOU_LOSE,
+      subHeader: this.TIME_EXPIRED,
+      message: this.TRY_REDUCE_DIFFICULTY,
+      buttons: [this.OK]
     });
 
     await alert.present();
