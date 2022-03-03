@@ -35,16 +35,14 @@ export class PlayPage implements AfterViewInit {
   @ViewChild('canvas') canvasEl: ElementRef;
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
   private _CANVAS: any;
-  public message;
-  public hasTimer;
-  public config: CountdownConfig;// = { format: `mm:ss`, leftTime: 1 };
+  public message: string;
+  public hasTimer: boolean;
+  public config: CountdownConfig;
   public p_bar_value: number = 1;
-  public progressBarUpdate;
-  public PLAY;
-  public RESET;
-  public SOLVE;
-  private language;
-
+  public progressBarUpdate: any;
+  public PLAY: string;
+  public RESET: string;
+  public SOLVE: string;
   public nodes = {
     "A": { marked: false, available: true, selected: false },
     "B": { marked: false, available: true, selected: false },
@@ -134,7 +132,9 @@ export class PlayPage implements AfterViewInit {
   }
 
   public handleSolve(): void {
-    alert('Not implemented yet!');
+    this.hasTimer = false;
+    clearInterval(this.progressBarUpdate);
+    this.gameService.solve();
   }
 
   public handleReset(): void {

@@ -55,6 +55,10 @@ export class GameService {
     }
   }
 
+  public solve(): void {
+    alert('Not implemented yet!');
+  }
+
   public isSelected(label: string): any {
     return (this.selectedNode === label);
   }
