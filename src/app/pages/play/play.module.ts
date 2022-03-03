@@ -1,4 +1,5 @@
-import { Star5PuzzleService } from './../../services/star5puzzle.service';
+import { StarService } from './../../services/star.service';
+import { GameService } from '../../services/game.service';
 import { PlayPageRoutingModule } from './play-routing.module';
 import { NgModule } from '@angular/core';
 import { PlayPage} from './play.page';
@@ -20,7 +21,8 @@ import { AlertController } from '@ionic/angular';
     CountdownModule
   ],
   providers: [
-    Star5PuzzleService,
+    GameService,
+    StarService,
     ModalController,
     AlertController
   ]

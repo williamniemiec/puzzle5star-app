@@ -4,5 +4,8 @@
     "HARD": "Difícil",
     "SOLVE": "Resolver",
     "RESET": "Reiniciar",
-    "PLAY": "Jogar"
+    "PLAY": "Jogar",
+    "EASY_MESSAGE": "Marque 9 pontos.",
+    "MEDIUM_MESSAGE": "Marque 9 pontos antes de o tempo acabar.",
+    "HARD_MESSAGE": "Marque 9 pontos antes de o tempo acabar."
 }

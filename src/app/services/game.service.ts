@@ -9,13 +9,25 @@ import { GameSettings } from "../models/game-settings.model";
 @Injectable(
   { providedIn: 'root' }
 )
-export class Star5PuzzleService {
+export class GameService {
   
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
   private selectedNode = "";
   private levelService: LevelService;
+  private nodes = {
+    "A": { marked: false, available: true, selected: false },
+    "B": { marked: false, available: true, selected: false },
+    "C": { marked: false, available: true, selected: false },
+    "D": { marked: false, available: true, selected: false },
+    "E": { marked: false, available: true, selected: false },
+    "F": { marked: false, available: true, selected: false },
+    "G": { marked: false, available: true, selected: false },
+    "H": { marked: false, available: true, selected: false },
+    "I": { marked: false, available: true, selected: false },
+    "J": { marked: false, available: true, selected: false },
+  };
 
 
   //---------------------------------------------------------------------------
@@ -48,10 +60,10 @@ export class Star5PuzzleService {
   }
 
   public isMarked(label: string): boolean {
-    return false;
+    return this.nodes[label].marked;
   }
   
   public isAvailable(label: string): boolean {
-    return true;
+    return this.nodes[label].available;
   }
 }

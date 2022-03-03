@@ -4,5 +4,8 @@
     "HARD": "Hard",
     "SOLVE": "Solve",
     "RESET": "Reset",
-    "PLAY": "Play"
+    "PLAY": "Play",
+    "EASY_MESSAGE": "Mark 9 points.",
+    "MEDIUM_MESSAGE": "Mark 9 points before time expires.",
+    "HARD_MESSAGE": "Mark 9 points before time expires."
 }

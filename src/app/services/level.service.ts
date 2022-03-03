@@ -36,7 +36,7 @@ export class LevelService {
       level: "easy",
       hasTimer: false,
       timer: 0,
-      message: "Mark 9 points."
+      message: "EASY_MESSAGE"
     }
   }
 
@@ -45,7 +45,7 @@ export class LevelService {
       level: "medium",
       hasTimer: true,
       timer: 50,
-      message: "Mark 9 points before time expires."
+      message: "MEDIUM_MESSAGE"
     }
   }
 
@@ -54,7 +54,7 @@ export class LevelService {
       level: "easy",
       hasTimer: true,
       timer: 15,
-      message: "Mark 9 points before time expires."
+      message: "HARD_MESSAGE"
     }
   }
 

@@ -1,5 +1,7 @@
+import { StarNode } from './../../models/star-node.model';
+import { StarService } from './../../services/star.service';
 import { CountdownConfig } from './../../../../node_modules/ngx-countdown/interfaces.d';
-import { Star5PuzzleService } from './../../services/star5puzzle.service';
+import { GameService } from '../../services/game.service';
 import {
   Component,
   ElementRef,
@@ -33,11 +35,6 @@ export class PlayPage implements AfterViewInit {
   @ViewChild('canvas') canvasEl: ElementRef;
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
   private _CANVAS: any;
-  //private _CONTEXT : any;
-  private dx = 0;
-  public dy = 0;
-  public radius = 100;
-  public dig = 10;
   public message;
   public hasTimer;
   public config: CountdownConfig;// = { format: `mm:ss`, leftTime: 1 };
@@ -68,7 +65,8 @@ export class PlayPage implements AfterViewInit {
   constructor(
     public router: Router,
     private routeParams: ActivatedRoute,
-    public star5puzzleService: Star5PuzzleService,
+    public gameService: GameService,
+    public starService: StarService,
     public modalController: ModalController,
     private translate: TranslateService,
     private alertController: AlertController
@@ -84,7 +82,7 @@ export class PlayPage implements AfterViewInit {
     this._CANVAS.height = 200;
     this.renderText();
     this.loadLevel();
-    this.draw();
+    this.drawStar();
   }
 
   private renderText(): void {
@@ -99,12 +97,14 @@ export class PlayPage implements AfterViewInit {
     });
   }
 
-
-  private loadLevel() {
+  private loadLevel(): void {
     const level = this.routeParams.snapshot.params.level;
-    const gameConfig: GameSettings = this.star5puzzleService.newGame(level);
+    const gameConfig: GameSettings = this.gameService.newGame(level);
 
-    this.message = gameConfig.message;
+    this.translate.get(gameConfig.message).subscribe((res: string) => {
+      this.message = res;
+    });
+    this.hasTimer = gameConfig.hasTimer;
 
     if (gameConfig.hasTimer) {
       this.hasTimer = true;
@@ -115,51 +115,21 @@ export class PlayPage implements AfterViewInit {
         this.p_bar_value = this.countdown.left / (1000 * this.config.leftTime);
       }, 1000);
     }
-    else {
-      this.hasTimer = false;
-    }
   }
 
-  private draw() {
+  private drawStar(): void {
+    const context = this._CANVAS.getContext('2d');
 
-    //var context = canvas.getContext('2d');
-    var context = this._CANVAS.getContext('2d');
-    //context.fillStyle = "#EEEEDD";
-    //context.fillRect(0, 0, 400, 300);
-    context.translate(100, 100);
-    context.strokeStyle = '#f7c11e';
-    context.lineWidth = 3;
-    this.draw5Star(context);
-    context.stroke();
-
-
-  }
-
-  private draw5Star(context) {
-    context.beginPath();
-    var x = this.radius * Math.sin(Math.PI / 5) + this.dx;
-    var y = this.radius * Math.cos(Math.PI / 5) + this.dy;
-
-    context.moveTo(x, y);
-
-
-    for (var i = 1; i < 5; i++) {
-      var x = this.radius * Math.sin(i * this.dig + Math.PI / 5);
-      var y = this.radius * Math.cos(i * this.dig + Math.PI / 5);
-      context.lineTo(this.dx + x, this.dy + y);
-    }
-
-    context.closePath();
-
+    this.starService.drawStar(context);
   }
 
   public handleNodeSelect(nodeLabel: string): void {
-    this.star5puzzleService.selectStar(nodeLabel);
+    this.gameService.selectStar(nodeLabel);
 
     for (let label of Object.keys(this.nodes)) {
-      this.nodes[label].available = this.star5puzzleService.isAvailable(label);
-      this.nodes[label].selected = this.star5puzzleService.isSelected(label);
-      this.nodes[label].isMarked = this.star5puzzleService.isMarked(label);
+      this.nodes[label].available = this.gameService.isAvailable(label);
+      this.nodes[label].selected = this.gameService.isSelected(label);
+      this.nodes[label].isMarked = this.gameService.isMarked(label);
     }
   }
 
