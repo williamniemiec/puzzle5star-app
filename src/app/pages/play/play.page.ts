@@ -27,38 +27,27 @@ import { GameSettings } from "../../models/game-settings.model";
   templateUrl: './play.page.html',
   styleUrls: ['./play.page.scss']
 })
-export class PlayPage implements AfterViewInit {
+export class PlayPage implements AfterViewInit, OnInit {
 
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
   @ViewChild('canvas') canvasEl: ElementRef;
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
-  private _CANVAS: any;
   public message: string;
   public hasTimer: boolean;
   public config: CountdownConfig;
   public p_bar_value: number = 1;
   public progressBarUpdate: any;
+  public nodes: Map<string, StarNode>;
   public PLAY: string;
   public RESET: string;
   public SOLVE: string;
+  private _CANVAS: any;
   private YOU_LOSE: string;
   private TIME_EXPIRED: string;
   private TRY_REDUCE_DIFFICULTY: string;
   private OK: string;
-  public nodes = {
-    "A": { marked: false, available: true, selected: false },
-    "B": { marked: false, available: true, selected: false },
-    "C": { marked: false, available: true, selected: false },
-    "D": { marked: false, available: true, selected: false },
-    "E": { marked: false, available: true, selected: false },
-    "F": { marked: false, available: true, selected: false },
-    "G": { marked: false, available: true, selected: false },
-    "H": { marked: false, available: true, selected: false },
-    "I": { marked: false, available: true, selected: false },
-    "J": { marked: false, available: true, selected: false },
-  };
 
 
   //---------------------------------------------------------------------------
@@ -76,6 +65,10 @@ export class PlayPage implements AfterViewInit {
     this.message = ""
     this.hasTimer = true;
     this.config = { format: `mm:ss`, leftTime: 1 };
+  }
+
+  ngOnInit(): void {
+    this.nodes = this.gameService.getNodes();
   }
 
   ngAfterViewInit() {
@@ -109,7 +102,6 @@ export class PlayPage implements AfterViewInit {
     this.translate.get('OK').subscribe((res: string) => {
       this.OK = res;
     });
-
   }
 
   private loadLevel(): void {
@@ -141,10 +133,10 @@ export class PlayPage implements AfterViewInit {
   public handleNodeSelect(nodeLabel: string): void {
     this.gameService.selectStar(nodeLabel);
 
-    for (let label of Object.keys(this.nodes)) {
-      this.nodes[label].available = this.gameService.isAvailable(label);
-      this.nodes[label].selected = this.gameService.isSelected(label);
-      this.nodes[label].isMarked = this.gameService.isMarked(label);
+    for (let label of this.nodes.keys()) {
+      this.nodes.get(label).available = this.gameService.isAvailable(label);
+      this.nodes.get(label).selected = this.gameService.isSelected(label);
+      this.nodes.get(label).marked = this.gameService.isMarked(label);
     }
   }
 

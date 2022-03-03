@@ -1,3 +1,4 @@
+import { StarNode } from './../models/star-node.model';
 import { LevelService } from './level.service';
 import { Injectable } from "@angular/core";
 import { GameSettings } from "../models/game-settings.model";
@@ -16,18 +17,7 @@ export class GameService {
   //---------------------------------------------------------------------------
   private selectedNode = "";
   private levelService: LevelService;
-  private nodes = {
-    "A": { marked: false, available: true, selected: false },
-    "B": { marked: false, available: true, selected: false },
-    "C": { marked: false, available: true, selected: false },
-    "D": { marked: false, available: true, selected: false },
-    "E": { marked: false, available: true, selected: false },
-    "F": { marked: false, available: true, selected: false },
-    "G": { marked: false, available: true, selected: false },
-    "H": { marked: false, available: true, selected: false },
-    "I": { marked: false, available: true, selected: false },
-    "J": { marked: false, available: true, selected: false },
-  };
+  private nodes: Map<string, StarNode>;
 
 
   //---------------------------------------------------------------------------
@@ -36,12 +26,25 @@ export class GameService {
   constructor(
   ) {
     this.levelService = new LevelService();
+    this.nodes = this.initializeNodes();
   }
 
 
   //---------------------------------------------------------------------------
   //		Methods
   //---------------------------------------------------------------------------
+  private initializeNodes(): Map<string, StarNode> {
+    console.log("A")
+    const initializedNodes = new Map();
+    const nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+    for (let node of nodeLabels) {
+      initializedNodes.set(node, { marked: false, available: true, selected: false });
+    }
+
+    return initializedNodes;
+  }
+
   public newGame(level: string): GameSettings {
     return this.levelService.getLevel(level);
   }
@@ -64,10 +67,14 @@ export class GameService {
   }
 
   public isMarked(label: string): boolean {
-    return this.nodes[label].marked;
+    return this.nodes.get(label).marked;
   }
   
   public isAvailable(label: string): boolean {
-    return this.nodes[label].available;
+    return this.nodes.get(label).available;
+  }
+
+  public getNodes(): Map<string, StarNode> {
+    return this.nodes;
   }
 }
