@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) William Niemiec.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { StarNode } from './../models/star-node.model';
 import { LevelService } from './level.service';
 import { Injectable } from "@angular/core";
@@ -17,6 +24,7 @@ export class GameService {
   //---------------------------------------------------------------------------
   private selectedNode = "";
   private levelService: LevelService;
+  private nodeLabels: Array<string>;
   private nodes: Map<string, StarNode>;
 
 
@@ -26,6 +34,7 @@ export class GameService {
   constructor(
   ) {
     this.levelService = new LevelService();
+    this.nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     this.nodes = this.initializeNodes();
   }
 
@@ -36,9 +45,9 @@ export class GameService {
   private initializeNodes(): Map<string, StarNode> {
     console.log("A")
     const initializedNodes = new Map();
-    const nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    
 
-    for (let node of nodeLabels) {
+    for (let node of this.nodeLabels) {
       initializedNodes.set(node, { marked: false, available: true, selected: false });
     }
 
@@ -55,6 +64,15 @@ export class GameService {
     }
     else {
       this.selectedNode = label;
+    }
+
+    if (label == 'A') {
+      for (let node of this.nodeLabels) {
+        this.nodes.get(node).available = false;
+      }
+
+      this.nodes.get('H').available = true;
+      this.nodes.get('D').marked = true;
     }
   }
 

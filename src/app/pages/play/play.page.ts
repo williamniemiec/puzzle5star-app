@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) William Niemiec.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { StarNode } from './../../models/star-node.model';
 import { StarService } from './../../services/star.service';
 import { CountdownConfig } from './../../../../node_modules/ngx-countdown/interfaces.d';
