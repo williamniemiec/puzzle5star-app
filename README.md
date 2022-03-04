@@ -58,6 +58,8 @@ Type in your terminal:
 
 <img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen6.png" alt="image 6" />
 
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen7.png" alt="image 7" />
+
 </div>
 
 ## 🚩 Changelog
