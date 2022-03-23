@@ -8,8 +8,8 @@
 import { 
     Component, 
     AfterViewInit
-  } from '@angular/core';
-  import { TranslateService } from '@ngx-translate/core';
+ } from '@angular/core';
+ import { TranslateService } from '@ngx-translate/core';
 
 
 /**

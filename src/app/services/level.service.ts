@@ -40,7 +40,7 @@ export class LevelService {
   //---------------------------------------------------------------------------
   private buildEasyGameSettings(): GameSettings {
     return {
-      level: "easy",
+      level: "EASY",
       hasTimer: false,
       timer: 0,
       message: "EASY_MESSAGE",
@@ -50,7 +50,7 @@ export class LevelService {
 
   private buildMediumGameSettings(): GameSettings {
     return {
-      level: "medium",
+      level: "MEDIUM",
       hasTimer: true,
       timer: 50,
       message: "MEDIUM_MESSAGE",
@@ -60,7 +60,7 @@ export class LevelService {
 
   private buildHardGameSettings(): GameSettings {
     return {
-      level: "easy",
+      level: "HARD",
       hasTimer: true,
       timer: 15,
       message: "HARD_MESSAGE",
