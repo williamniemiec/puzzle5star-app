@@ -13,7 +13,7 @@
 </p>
 
 <div height=100 align='center'>
-  <a href='https://play.google.com/store/apps/details?id=wniemiec.app.puzzle5star'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=200 align='center' /></a>
+  <a href='https://play.google.com/store/apps/details?id=wniemiec.app.puzzle5star'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=172 align='center' /></a>
     <a href='https://wniemiec-web-puzzle5star.herokuapp.com/'><img alt='Deploy' src='https://www.herokucdn.com/deploy/button.svg' width=200 align='center' /></a>
   
 </div>
