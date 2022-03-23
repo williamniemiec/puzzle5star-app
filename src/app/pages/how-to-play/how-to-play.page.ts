@@ -7,13 +7,9 @@
 
 import { 
     Component, 
-    ElementRef,
-    ViewChild,
-    OnInit, 
     AfterViewInit
   } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 /**
@@ -24,25 +20,58 @@ import { MenuController } from '@ionic/angular';
   templateUrl: './how-to-play.page.html',
   styleUrls: ['./how-to-play.page.scss']
 })
-export class HowToPlayPage implements OnInit {
+export class HowToPlayPage implements AfterViewInit {
 
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  public howToPlayDescription = "";
+  public PUZZLE_DESCRIPTION: string;
+  public HOW_TO_PLAY: string;
+  public SCREENS_DESCRIPTION: string;
+  public AVAILABLE: string;
+  public UNAVAILABLE: string;
+  public SELECTED: string;
+  public MARKED: string;
+
 
 
   //---------------------------------------------------------------------------
   //		Constructor
   //---------------------------------------------------------------------------
-  constructor(public router: Router) {
+  constructor(
+    private translate: TranslateService
+  ) {
   }
 
 
   //---------------------------------------------------------------------------
   //		Methods
   //---------------------------------------------------------------------------
-  ngOnInit(): void {
-      this.howToPlayDescription = "O problema consiste em, a partir de um ponto de partida escolhido livremente por um usuário entre os 10 disponíveis marcar outro ponto distante de um ponto deste em linha reta (ambos pontos não devem ainda ainda estarem marcados), O objetivo é marcar o maior número possível de pontos (que são 9). O ponto de passagem independe de marcação.";
+  ngAfterViewInit(): void {
+    this.renderText();
+  }
+
+  private renderText(): void {
+    this.translate.get('PUZZLE_DESCRIPTION').subscribe((res: string) => {
+      this.PUZZLE_DESCRIPTION = res;
+    });
+    this.translate.get('HOW_TO_PLAY').subscribe((res: string) => {
+      this.HOW_TO_PLAY = res;
+    });
+    this.translate.get('SCREENS_DESCRIPTION').subscribe((res: string) => {
+      this.SCREENS_DESCRIPTION = res;
+    });
+    this.translate.get('AVAILABLE').subscribe((res: string) => {
+      this.AVAILABLE = res;
+    });
+    this.translate.get('UNAVAILABLE').subscribe((res: string) => {
+      this.UNAVAILABLE = res;
+    });
+    this.translate.get('SELECTED').subscribe((res: string) => {
+      this.SELECTED = res;
+    });
+    this.translate.get('MARKED').subscribe((res: string) => {
+      this.MARKED = res;
+    });
   }
 }

@@ -5,13 +5,49 @@
         <ion-back-button defaultHref="home"></ion-back-button>
       </ion-buttons>
       <ion-title>
-        How to play
+        {{ HOW_TO_PLAY }}
       </ion-title>
     </ion-toolbar>
   </ion-header>
   <div class="container">
     <div class="panel">
-      {{howToPlayDescription}}
+      <p>
+        {{ PUZZLE_DESCRIPTION }}
+      </p>
+      <div class="screens">
+        <img src="/assets/images/screens/screen1.png" alt="image 1" />
+        <img src="/assets/images/screens/screen2.png" alt="image 2" />
+        <img src="/assets/images/screens/screen3.png" alt="image 3" />
+      </div>
+      <span class="picture-label">
+        {{ SCREENS_DESCRIPTION }}
+      </span>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-icon legend-icon-green"></div>
+          <p class="legend-text">
+            {{ AVAILABLE }}
+          </p>
+        </div>
+        <div class="legend-item">
+          <div class="legend-icon legend-icon-red"></div>
+          <p class="legend-text">
+            {{ UNAVAILABLE }}
+          </p>
+        </div>
+        <div class="legend-item">
+          <div class="legend-icon legend-icon-yellow-outlined"></div>
+          <p class="legend-text">
+            {{ SELECTED }}
+          </p>
+        </div>
+        <div class="legend-item">
+          <div class="legend-icon legend-icon-yellow"></div>
+          <p class="legend-text">
+            {{ MARKED }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

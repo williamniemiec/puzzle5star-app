@@ -12,5 +12,12 @@
     "YOU_LOSE": "Você perdeu!",
     "TIME_EXPIRED": "Tempo expirado",
     "TRY_REDUCE_DIFFICULTY": "Tente reduzir a dificuldade",
-    "OK": "Certo"
+    "OK": "Certo",
+    "PUZZLE_DESCRIPTION": "O puzzle consiste na marcação de pontos de chegada a partir de um ponto de partida escolhido livremente por um usuário, entre os 10 disponíveis,  para chegar em linha reta em outro ponto, passando por um ponto (marcado ou não). Evidentemente, cada trajeto parte de um ponto de partida ainda não marcado para chegar em um outro ainda não marcado que será marcado no final do trajeto.",
+    "HOW_TO_PLAY": "Como jogar",
+    "SCREENS_DESCRIPTION": "Na esquerda, a configuração inicial do jogo, com todos os nodos disponíveis; no meio, a configuração do jogo ao selecionar o nodo \"A\"; na direita, a configuração após ter selecionado o nodo \"D\" (partindo da configuração do meio) e ter selecionado novamente o nodo \"A\".",
+    "AVAILABLE": "Disponível",
+    "UNAVAILABLE": "Indisponível",
+    "SELECTED": "Selecionado",
+    "MARKED": "Marcado"
 }

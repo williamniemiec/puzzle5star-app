@@ -5,6 +5,11 @@
   justify-content: space-between;
 }
 
+.panel {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 .star {
     display: flex;
     justify-content: center;
