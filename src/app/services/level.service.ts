@@ -43,7 +43,8 @@ export class LevelService {
       level: "easy",
       hasTimer: false,
       timer: 0,
-      message: "EASY_MESSAGE"
+      message: "EASY_MESSAGE",
+      solverEnabled: true
     }
   }
 
@@ -52,7 +53,8 @@ export class LevelService {
       level: "medium",
       hasTimer: true,
       timer: 50,
-      message: "MEDIUM_MESSAGE"
+      message: "MEDIUM_MESSAGE",
+      solverEnabled: false
     }
   }
 
@@ -61,7 +63,8 @@ export class LevelService {
       level: "easy",
       hasTimer: true,
       timer: 15,
-      message: "HARD_MESSAGE"
+      message: "HARD_MESSAGE",
+      solverEnabled: false
     }
   }
 

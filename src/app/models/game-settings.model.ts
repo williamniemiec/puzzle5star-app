@@ -11,4 +11,5 @@ export interface GameSettings {
   hasTimer: boolean;
   timer: number;
   message: string;
+  solverEnabled: boolean;
 }

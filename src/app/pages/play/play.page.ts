@@ -45,7 +45,7 @@ export class PlayPage implements AfterViewInit, OnInit {
   public config: CountdownConfig;
   public p_bar_value: number = 1;
   public progressBarUpdate: any;
-  public hasSelectedAnyNode: boolean;
+  public solveEnabled: boolean;
   public nodes: Map<string, StarNode>;
   public PLAY: string;
   public RESET: string;
@@ -73,7 +73,7 @@ export class PlayPage implements AfterViewInit, OnInit {
     this.message = ""
     this.hasTimer = true;
     this.config = { format: `mm:ss`, leftTime: 1 };
-    this.hasSelectedAnyNode = false;
+    this.solveEnabled = true;
   }
 
   ngOnInit(): void {
@@ -126,6 +126,7 @@ export class PlayPage implements AfterViewInit, OnInit {
       this.message = res;
     });
     this.hasTimer = gameConfig.hasTimer;
+    this.solveEnabled = gameConfig.solverEnabled;
 
     if (gameConfig.hasTimer) {
       this.hasTimer = true;
@@ -157,7 +158,7 @@ export class PlayPage implements AfterViewInit, OnInit {
         this.nodes.get(label).marked = this.gameService.isMarked(label);
       }
 
-      this.hasSelectedAnyNode = true;
+      this.solveEnabled = false;
     }
   }
 

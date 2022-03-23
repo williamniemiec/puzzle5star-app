@@ -173,7 +173,7 @@
           expand="full" 
           class="theme-button"
           (click)="handleSolve()"
-          [disabled]="hasSelectedAnyNode"
+          [disabled]="!solveEnabled"
         >
           {{ SOLVE }}
         </ion-button>
