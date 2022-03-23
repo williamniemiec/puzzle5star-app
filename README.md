@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/logo/logo.jpg)
 
 <h1 align='center'>puzzle5star-app</h1>
-<p align='center'>Website about a shopping system built with Ionic Framework along with Angular.</p>
+<p align='center'>Five pointed star puzzle.</p>
 <p align="center">
 	<a href="https://github.com/williamniemiec/puzzle5star-app/actions/workflows/windows.yml"><img src="https://github.com/williamniemiec/puzzle5star-app/actions/workflows/windows.yml/badge.svg" alt=""></a>
 	<a href="https://github.com/williamniemiec/puzzle5star-app/actions/workflows/macos.yml"><img src="https://github.com/williamniemiec/puzzle5star-app/actions/workflows/macos.yml/badge.svg" alt=""></a>
@@ -23,9 +23,12 @@
 ## ❇ Introduction
 Puzzle is a genre of video game or some video games that focuses on solving puzzles. The types of puzzles to be solved can test different skills of the player, such as logic, strategy, pattern recognition, solving sequences and having to complete words. In this work, an application will be made whose objective is to teach how to play the five pointed star puzzle.
 
-In this puzzle, there is a five-pointed star with 10 points that are formed by the encounters and intersections of line segments. Five pointed star puzzle consists of, from a starting point freely chosen among the 10 available, to mark another point distant from this point in a straight line (both points must not be marked yet). The objective is to score as many points as possible (which are 9). It is worth mentioning that the waypoint is independent of marking. This is a problem that is not comprehensively available on the internet, and this is the main motivation of this work.
+In this puzzle, there is a five-pointed star with 10 points that are formed by the encounters and intersections of line segments. Five pointed star puzzle consists of, from a starting point freely chosen among the 10 available, to mark another point distant from this point in a straight line (both points must not be marked yet). The objective is to mark as many points as possible (which are 9). It is worth mentioning that the waypoint is independent of marking. This is a problem that is not comprehensively available on the internet, and this is the main motivation of this work.
 
 At last, puzzle5star is an application built with Ionic Framework along with Angular. You can interact with the project through the Heroku platform ([click here to access](https://wniemiec-web-puzzle5star.herokuapp.com/)).
+
+## Acknowledgements
+Special thanks to [Renan Magagnin](https://github.com/renanmagagnin) for developing the solver.
 
 
 ## ⚠ Warnings

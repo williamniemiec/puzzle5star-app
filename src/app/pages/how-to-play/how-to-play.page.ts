@@ -38,9 +38,7 @@ export class HowToPlayPage implements AfterViewInit {
   //---------------------------------------------------------------------------
   //		Constructor
   //---------------------------------------------------------------------------
-  constructor(
-    private translate: TranslateService
-  ) {
+  constructor(private translate: TranslateService) {
   }
 
 
