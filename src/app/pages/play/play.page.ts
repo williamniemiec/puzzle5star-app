@@ -17,9 +17,8 @@ import {
   AfterViewInit
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
-import { Location } from '@angular/common';
 import { CountdownComponent } from 'ngx-countdown';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
@@ -46,11 +45,13 @@ export class PlayPage implements AfterViewInit, OnInit {
   public config: CountdownConfig;
   public p_bar_value: number = 1;
   public progressBarUpdate: any;
+  public hasSelectedAnyNode: boolean;
   public nodes: Map<string, StarNode>;
   public PLAY: string;
   public RESET: string;
   public SOLVE: string;
   private _CANVAS: any;
+  private WON_GAME: string;
   private YOU_LOSE: string;
   private TIME_EXPIRED: string;
   private TRY_REDUCE_DIFFICULTY: string;
@@ -72,6 +73,7 @@ export class PlayPage implements AfterViewInit, OnInit {
     this.message = ""
     this.hasTimer = true;
     this.config = { format: `mm:ss`, leftTime: 1 };
+    this.hasSelectedAnyNode = false;
   }
 
   ngOnInit(): void {
@@ -97,6 +99,9 @@ export class PlayPage implements AfterViewInit, OnInit {
     this.translate.get('SOLVE').subscribe((res: string) => {
       this.SOLVE = res;
     });
+    this.translate.get('WON_GAME').subscribe((res: string) => {
+      this.WON_GAME = res;
+    });
     this.translate.get('YOU_LOSE').subscribe((res: string) => {
       this.YOU_LOSE = res;
     });
@@ -114,6 +119,8 @@ export class PlayPage implements AfterViewInit, OnInit {
   private loadLevel(): void {
     const level = this.routeParams.snapshot.params.level;
     const gameConfig: GameSettings = this.gameService.newGame(level);
+    
+    this.nodes = this.gameService.getNodes();
 
     this.translate.get(gameConfig.message).subscribe((res: string) => {
       this.message = res;
@@ -138,19 +145,35 @@ export class PlayPage implements AfterViewInit, OnInit {
   }
 
   public handleNodeSelect(nodeLabel: string): void {
-    this.gameService.selectStar(nodeLabel);
+    const hasWinGame = this.gameService.selectStar(nodeLabel);
 
-    for (let label of this.nodes.keys()) {
-      this.nodes.get(label).available = this.gameService.isAvailable(label);
-      this.nodes.get(label).selected = this.gameService.isSelected(label);
-      this.nodes.get(label).marked = this.gameService.isMarked(label);
+    if (hasWinGame) {
+      this.message = this.WON_GAME;
+    }
+    else {
+      for (let label of this.nodes.keys()) {
+        this.nodes.get(label).available = this.gameService.isAvailable(label);
+        this.nodes.get(label).selected = this.gameService.isNodeSelected(label);
+        this.nodes.get(label).marked = this.gameService.isMarked(label);
+      }
+
+      this.hasSelectedAnyNode = true;
     }
   }
 
   public handleSolve(): void {
     this.hasTimer = false;
     clearInterval(this.progressBarUpdate);
-    this.gameService.solve();
+    
+    const solution = this.gameService.solve();
+    
+    this.message = this.message.concat('\n\n');
+
+    for (let i = 0; i < solution.length; i++) {
+      this.message = this.message.concat(`${i+1}.  `);
+      this.message = this.message.concat(solution[i]);
+      this.message = this.message.concat('\n');
+    }
   }
 
   public handleReset(): void {

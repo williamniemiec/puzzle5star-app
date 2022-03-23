@@ -8,6 +8,7 @@
     "EASY_MESSAGE": "Mark 9 points.",
     "MEDIUM_MESSAGE": "Mark 9 points before time expires.",
     "HARD_MESSAGE": "Mark 9 points before time expires.",
+    "WON_GAME": "Congratulation, you won the game!!!",
     "YOU_LOSE": "You lose!",
     "TIME_EXPIRED": "Time expired",
     "TRY_REDUCE_DIFFICULTY": "Try to reduce difficulty",

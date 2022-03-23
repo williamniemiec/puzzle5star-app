@@ -48,6 +48,20 @@ ion-toolbar {
     border: 2px solid var(--ion-color-secondary);
     border-radius: 5px;
     padding: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: all ease 0.2s;
+}
+
+.panel p {
+    display: block;
+    unicode-bidi: embed;
+    white-space: pre;
+    transition: all ease 0.2s;
+}
+
+.theme-button {
+    transition: all ease 0.2s;
 }
 
 .modal-default, .inner-scroll {

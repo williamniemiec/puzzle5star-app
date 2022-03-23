@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     margin: 50px 0;
+    transition: all ease 0.2s;
   }
     
   #a {
@@ -67,7 +68,7 @@
     height: 25px;
     text-align: center;
     font-weight: bold;
-    
+    transition: all ease 0.2s;
     background-color: var(--ion-color-primary);
     color: var(--ion-color-primary-contrast);
     border: 3px solid var(--ion-color-primary);
