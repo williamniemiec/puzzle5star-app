@@ -121,9 +121,21 @@ export class GameService {
           this.nodes.get(node).available = !this.markedNodes.has(node);
         }
       }
+      else {
+        const availableNodes = this.getAvailableOptionsForNode(this.selectedNodes[0], this.markedNodes);
+        for (let node of this.nodeLabels) {
+          this.nodes.get(node).available = this.selectedNodes.includes(node) || availableNodes.has(node);
+        }
+      }
     }
     else if (this.hasNodeSelected()) { // Selected another node
       this.selectNode(label);
+
+      const availableNodes = this.getAvailableOptionsForNodes(this.selectedNodes[0], this.selectedNodes[1]);
+
+      for (let node of this.nodeLabels) {
+        this.nodes.get(node).available = this.selectedNodes.includes(node) || availableNodes.has(node);
+      }
       
       if (this.isLastNodeSelection()) {
         this.endSelection();
@@ -142,6 +154,21 @@ export class GameService {
     }
 
     return winGame;
+  }
+
+  private getAvailableOptionsForNodes(node1: string, node2: string): Set<string> {
+    const availableNodes: Set<string> = new Set();
+
+    for (let entry of this.markingGraph.get(node1)) {
+      if (entry.getFirst() == node2) {
+        availableNodes.add(entry.getSecond());
+      }
+      else if (entry.getSecond() == node2) {
+        availableNodes.add(entry.getFirst());
+      }
+    }
+
+    return availableNodes;
   }
 
   private getAvailableOptionsForNode(node: string, marked: Set<string>): Set<string> {

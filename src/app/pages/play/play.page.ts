@@ -151,15 +151,14 @@ export class PlayPage implements AfterViewInit, OnInit {
     if (hasWinGame) {
       this.message = this.WON_GAME;
     }
-    else {
-      for (let label of this.nodes.keys()) {
-        this.nodes.get(label).available = this.gameService.isAvailable(label);
-        this.nodes.get(label).selected = this.gameService.isNodeSelected(label);
-        this.nodes.get(label).marked = this.gameService.isMarked(label);
-      }
-
-      this.solveEnabled = false;
+    
+    for (let label of this.nodes.keys()) {
+      this.nodes.get(label).available = this.gameService.isAvailable(label);
+      this.nodes.get(label).selected = this.gameService.isNodeSelected(label);
+      this.nodes.get(label).marked = this.gameService.isMarked(label);
     }
+
+    this.solveEnabled = false;
   }
 
   public handleSolve(): void {
