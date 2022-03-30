@@ -109,3 +109,7 @@ ion-progress-bar {
   --background: rgba(var(--ion-color-secondary-rgb), 0.3);
   --progress-background: var(--ion-color-secondary);
 }
+
+.panel p {
+  white-space: pre;
+}
