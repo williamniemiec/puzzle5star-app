@@ -1,8 +1,8 @@
 {
   "name": "puzzle-5star",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "1.0.0",
+  "author": "William Niemiec",
+  "homepage": "https://github.com/williamniemiec/puzzle5star-app/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -67,7 +67,7 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.4.4"
   },
-  "description": "An Ionic project",
+  "description": "Five pointed star puzzle.",
   "cordova": {
     "plugins": {
       "cordova-plugin-globalization": {},
