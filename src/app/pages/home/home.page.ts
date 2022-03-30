@@ -5,16 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { 
-    Component, 
-    ElementRef,
-    ViewChild,
-    OnInit, 
-    AfterViewInit
-  } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, ModalController } from '@ionic/angular';
-import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
+import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { LevelSelectionPage } from '../../components/level-selection/level-selection.page';
 
 
 /**
@@ -25,11 +20,14 @@ import { LevelSelectionPage } from 'src/app/components/level-selection/level-sel
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
-export class HomePage {
+export class HomePage implements AfterViewInit {
 
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
+  public PLAY: string;
+  public HOW_TO_PLAY: string;
+  public ABOUT: string;
 
 
   //---------------------------------------------------------------------------
@@ -37,7 +35,8 @@ export class HomePage {
   //---------------------------------------------------------------------------
   constructor(
     public router: Router,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private translate: TranslateService
   ) {
   }
 
@@ -45,6 +44,22 @@ export class HomePage {
   //---------------------------------------------------------------------------
   //		Methods
   //---------------------------------------------------------------------------
+  ngAfterViewInit(): void {
+    this.renderText();
+  }
+
+  private renderText(): void {
+    this.translate.get('PLAY').subscribe((res: string) => {
+      this.PLAY = res;
+    });
+    this.translate.get('HOW_TO_PLAY').subscribe((res: string) => {
+      this.HOW_TO_PLAY = res;
+    });
+    this.translate.get('ABOUT').subscribe((res: string) => {
+      this.ABOUT = res;
+    });
+  }
+
   public handleHowToPlay() {
     this.redirectTo('/how-to-play');
   }

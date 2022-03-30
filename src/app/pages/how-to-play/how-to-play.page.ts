@@ -5,10 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { 
-    Component, 
-    AfterViewInit
-  } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 
