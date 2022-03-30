@@ -13,7 +13,7 @@ import { LevelSelectionPageRoutingModule } from './level-selection-routing.modul
 
 
 /**
- * Responsible for managing home page context.
+ * Responsible for managing level selection context.
  */
 @NgModule({
   declarations: [LevelSelectionPage],

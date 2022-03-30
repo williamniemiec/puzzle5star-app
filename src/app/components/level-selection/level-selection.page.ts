@@ -10,6 +10,9 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 
+/**
+ * Responsible for representing level selection.
+ */
 @Component({
   selector: 'level-selection',
   templateUrl: './level-selection.page.html',
@@ -23,6 +26,7 @@ export class LevelSelectionPage implements AfterViewInit {
   public EASY: string;
   public MEDIUM: string;
   public HARD: string;
+  public DIFFICULTY: string;
 
 
   //---------------------------------------------------------------------------
@@ -43,6 +47,9 @@ export class LevelSelectionPage implements AfterViewInit {
   }
 
   private renderText(): void {
+    this.translate.get('DIFFICULTY').subscribe((res: string) => {
+      this.DIFFICULTY = res;
+    });
     this.translate.get('EASY').subscribe((res: string) => {
       this.EASY = res;
     });

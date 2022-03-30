@@ -22,5 +22,6 @@
     "MARKED": "Marked",
     "ABOUT": "About",
     "ABOUT_TEXT": "Puzzle5star is an application built with Ionic Framework along with Angular. It is available in Portuguese and English, and its source code is available on GitHub. This application was developed for learning purposes only and is not for profit.",
-    "COLLABORATORS": "Developed by William Niemiec. Special thanks to Renan Magagnin for developing the solver."
+    "COLLABORATORS": "Developed by William Niemiec. Special thanks to Renan Magagnin for developing the solver.",
+    "DIFFICULTY": "Difficulty"
 }
