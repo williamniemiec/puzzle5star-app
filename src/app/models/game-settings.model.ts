@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * Responsible for defining game settings.
+ */
 export interface GameSettings {
 
   level: string;

@@ -5,33 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { StarNode } from './../models/star-node.model';
-import { LevelService } from './level.service';
 import { Injectable } from "@angular/core";
+import { StarNode } from '../models/star-node.model';
+import Pair from '../models/pair.model';
 import { GameSettings } from "../models/game-settings.model";
-
-
-class Pair<T> {
-  private first: T;
-  private second: T;
-
-  constructor(first: T, second: T) {
-    this.first = first;
-    this.second = second;
-  }
-
-  public static of(first, second) {
-    return new Pair(first, second);
-  }
-
-  public getFirst(): T {
-    return this.first;
-  }
-
-  public getSecond(): T {
-    return this.second;
-  }
-}
+import { LevelService } from './level.service';
+import { ArrayService } from './array.service';
+import { SolverService } from './solver.service';
+import { StarService } from './star.service';
 
 
 /**
@@ -45,16 +26,12 @@ export class GameService {
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  private selectedNodes: Array<string>;
   private levelService: LevelService;
-  private nodeLabels: Array<string>;
+  private solverService: SolverService;
+  private starService: StarService;
+  private selectedNodes: Array<string>;
   private markedNodes: Set<string>;
   private nodes: Map<string, StarNode>;
-
-  /**
-   * A cycle graph where every edge represents a valid possible marking.
-   */ 
-  private markingGraph: Map<string, Set<Pair<string>>>;
 
 
   //---------------------------------------------------------------------------
@@ -63,11 +40,11 @@ export class GameService {
   constructor(
   ) {
     this.levelService = new LevelService();
-    this.nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-    this.selectedNodes = [];
+    this.solverService = new SolverService();
+    this.starService = new StarService();
     this.markedNodes = new Set();
+    this.selectedNodes = [];
     this.nodes = this.initializeNodes();
-    this.markingGraph = this.initializeMarkingGraph();
   }
 
 
@@ -76,32 +53,21 @@ export class GameService {
   //---------------------------------------------------------------------------
   private initializeNodes(): Map<string, StarNode> {
     const initializedNodes = new Map();
-    
 
-    for (let node of this.nodeLabels) {
+    for (let node of this.starService.getLabels()) {
       initializedNodes.set(node, { marked: false, available: true, selected: false });
     }
 
     return initializedNodes;
   }
 
-  private initializeMarkingGraph(): Map<string, Set<Pair<string>>> {
-    const initializedMarkingGraph = new Map();
-
-    initializedMarkingGraph.set('A', new Set([Pair.of('J', 'H'), Pair.of('B', 'D')]));
-    initializedMarkingGraph.set('B', new Set([Pair.of('J', 'I'), Pair.of('D', 'E')]));
-    initializedMarkingGraph.set('C', new Set([Pair.of('B', 'J'), Pair.of('D', 'F')]));
-    initializedMarkingGraph.set('D', new Set([Pair.of('B', 'A'), Pair.of('F', 'G')]));
-    initializedMarkingGraph.set('E', new Set([Pair.of('D', 'B'), Pair.of('F', 'H')]));
-    initializedMarkingGraph.set('F', new Set([Pair.of('D', 'C'), Pair.of('H', 'I')]));
-    initializedMarkingGraph.set('G', new Set([Pair.of('F', 'D'), Pair.of('H', 'J')]));
-    initializedMarkingGraph.set('H', new Set([Pair.of('F', 'E'), Pair.of('J', 'A')]));
-    initializedMarkingGraph.set('I', new Set([Pair.of('H', 'F'), Pair.of('J', 'B')]));
-    initializedMarkingGraph.set('J', new Set([Pair.of('H', 'G'), Pair.of('B', 'C')]));
-
-    return initializedMarkingGraph;
-  }
-
+  /**
+   * Starts a new game.
+   * 
+   * @param         level Level difficulty
+   * 
+   * @return        Game settings based on level provided
+   */
   public newGame(level: string): GameSettings {
     this.selectedNodes = [];
     this.markedNodes = new Set();
@@ -117,13 +83,13 @@ export class GameService {
       this.unselectNode(label);
 
       if (!this.hasNodeSelected()) {
-        for (let node of this.nodeLabels) {
+        for (let node of this.starService.getLabels()) {
           this.nodes.get(node).available = !this.markedNodes.has(node);
         }
       }
       else {
         const availableNodes = this.getAvailableOptionsForNode(this.selectedNodes[0], this.markedNodes);
-        for (let node of this.nodeLabels) {
+        for (let node of this.starService.getLabels()) {
           this.nodes.get(node).available = this.selectedNodes.includes(node) || availableNodes.has(node);
         }
       }
@@ -133,7 +99,7 @@ export class GameService {
 
       const availableNodes = this.getAvailableOptionsForNodes(this.selectedNodes[0], this.selectedNodes[1]);
 
-      for (let node of this.nodeLabels) {
+      for (let node of this.starService.getLabels()) {
         this.nodes.get(node).available = this.selectedNodes.includes(node) || availableNodes.has(node);
       }
       
@@ -146,7 +112,7 @@ export class GameService {
       this.selectNode(label);
       const availableNodes = this.getAvailableOptionsForNode(label, this.markedNodes);
 
-      for (let node of this.nodeLabels) {
+      for (let node of this.starService.getLabels()) {
         this.nodes.get(node).available = availableNodes.has(node);
       }
 
@@ -159,7 +125,7 @@ export class GameService {
   private getAvailableOptionsForNodes(node1: string, node2: string): Set<string> {
     const availableNodes: Set<string> = new Set();
 
-    for (let entry of this.markingGraph.get(node1)) {
+    for (let entry of this.starService.getPathFrom(node1)) {
       if (entry.getFirst() == node2) {
         availableNodes.add(entry.getSecond());
       }
@@ -186,7 +152,7 @@ export class GameService {
   private buildValidEdges(node: string, marked: Set<string>) {
     const validEdges: Array<Pair<string>> = []; 
 
-    for (let pair of this.markingGraph.get(node)) {
+    for (let pair of this.starService.getPathFrom(node)) {
       let destination = pair.getSecond();
 
       if (!marked.has(destination)) {
@@ -205,7 +171,7 @@ export class GameService {
     this.markedNodes.add(this.selectedNodes[2]);
     this.selectedNodes = [];
 
-    for (let node of this.nodeLabels) {
+    for (let node of this.starService.getLabels()) {
       if (this.markedNodes.has(node)) {
         continue;
       }
@@ -219,65 +185,8 @@ export class GameService {
   }
 
   public solve(): Array<string> {
-    return this.random_solution(this.markedNodes);
+    return this.solverService.randomSolution(this.markedNodes);
   }
-
-  private random_solution(marked: Set<string>=null): Array<string> {
-    const start = this.randomChoice(Array.from(this.markingGraph.keys()));
-    const markings = [];
-    let markedFromSolution = new Set(marked);
-    let candidates = [start];
-
-    while (candidates && markedFromSolution.size < 9) {
-      candidates = this.shuffle(candidates);
-      let currentTarget = candidates.pop();
-
-      let validEdges: Array<Pair<string>> = this.buildValidEdges(currentTarget, markedFromSolution);
-      
-      let possibleMarkings = [];
-      for (let pair of validEdges) {
-        let middle = pair.getFirst();
-        let destination = pair.getSecond();
-
-        possibleMarkings.push(`${destination}${middle}${currentTarget}`);
-      }
-
-      let marking = this.randomChoice(possibleMarkings);
-      markedFromSolution.add(currentTarget);
-      markings.push(marking);
-
-      for (let pair of validEdges) {
-        let destination = pair.getSecond();
-
-        candidates.push(destination);
-      }
-    }
-
-    return markings;
-  }
-
-  /* ARRAY SERVICE - START */
-  private randomChoice(list: Array<string>) {
-    const index = Math.floor(Math.random() * list.length);
-    
-    return list[index];
-  }
-
-  private shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-  
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-  
-    return array;
-  }  
-
-  /* ARRAY SERVICE - END */
 
   public isNodeSelected(label: string): boolean {
     return this.selectedNodes.includes(label);

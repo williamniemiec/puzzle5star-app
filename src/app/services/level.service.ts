@@ -29,9 +29,9 @@ export class LevelService {
   constructor(
   ) {
       this.levels = new Map();
-      this.levels.set("easy", this.buildEasyGameSettings());
-      this.levels.set("medium", this.buildMediumGameSettings());
-      this.levels.set("hard", this.buildHardGameSettings());
+      this.levels.set("EASY", this.buildEasyGameSettings());
+      this.levels.set("MEDIUM", this.buildMediumGameSettings());
+      this.levels.set("HARD", this.buildHardGameSettings());
   }
 
 
@@ -68,7 +68,11 @@ export class LevelService {
     }
   }
 
+
+  //---------------------------------------------------------------------------
+  //		Getters
+  //---------------------------------------------------------------------------
   public getLevel(level: string): GameSettings {
-    return this.levels.get(level);
+    return this.levels.get(level.toUpperCase());
   }
 }

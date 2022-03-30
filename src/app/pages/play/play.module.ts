@@ -1,4 +1,4 @@
-import { StarService } from './../../services/star.service';
+import { StarDrawerService } from '../../services/star-drawer.service';
 import { GameService } from '../../services/game.service';
 import { PlayPageRoutingModule } from './play-routing.module';
 import { NgModule } from '@angular/core';
@@ -22,7 +22,7 @@ import { AlertController } from '@ionic/angular';
   ],
   providers: [
     GameService,
-    StarService,
+    StarDrawerService,
     ModalController,
     AlertController
   ]

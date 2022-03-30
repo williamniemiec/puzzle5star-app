@@ -6,7 +6,7 @@
  */
 
 import { StarNode } from './../../models/star-node.model';
-import { StarService } from './../../services/star.service';
+import { StarDrawerService } from '../../services/star-drawer.service';
 import { CountdownConfig } from './../../../../node_modules/ngx-countdown/interfaces.d';
 import { GameService } from '../../services/game.service';
 import {
@@ -65,7 +65,7 @@ export class PlayPage implements AfterViewInit, OnInit {
     public router: Router,
     private routeParams: ActivatedRoute,
     public gameService: GameService,
-    public starService: StarService,
+    public starDrawerService: StarDrawerService,
     public modalController: ModalController,
     private translate: TranslateService,
     private alertController: AlertController
@@ -142,7 +142,7 @@ export class PlayPage implements AfterViewInit, OnInit {
   private drawStar(): void {
     const context = this._CANVAS.getContext('2d');
 
-    this.starService.drawStar(context);
+    this.starDrawerService.drawStar(context);
   }
 
   public handleNodeSelect(nodeLabel: string): void {
