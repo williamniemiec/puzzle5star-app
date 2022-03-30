@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocalesModule } from './config/locales.config';
 
 
+/**
+ * Responsible for managing AppComponent context.
+ */
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,5 +27,3 @@ import { LocalesModule } from './config/locales.config';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-

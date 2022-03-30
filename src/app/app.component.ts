@@ -1,19 +1,11 @@
-/**
- * Copyright (c) William Niemiec.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import { 
-  Component, 
-  ElementRef,
-  ViewChild,
-  OnInit, 
-  AfterViewInit
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { Globalization } from '@ionic-native/globalization';
 import { TranslateService } from '@ngx-translate/core';
+
+
+/**
+ * Responsible for defining application template.
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -21,15 +13,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent  {
 
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  //---------------------------------------------------------------------------
+  //		Constructor
+  //---------------------------------------------------------------------------
   constructor(
     translate: TranslateService
   ) {
@@ -39,11 +25,15 @@ export class AppComponent  {
     .then(lang => {
       translate.use(this.normalizeLanguage(lang.value));
      })
-    .catch(error => {
+    .catch(_ => {
       translate.use(this.normalizeLanguage(navigator.language));
      });
   }
 
+
+  //---------------------------------------------------------------------------
+  //		Methods
+  //---------------------------------------------------------------------------
   private normalizeLanguage(language: string): string {
     if (!language.includes("-")) {
       return language;
