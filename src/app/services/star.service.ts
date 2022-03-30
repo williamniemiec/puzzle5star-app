@@ -20,12 +20,12 @@ export class StarService {
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  private labels: Array<string>;
+  private readonly labels: Array<string>;
 
   /**
    * A cycle graph where every edge represents a valid possible marking.
    */ 
-   private markingGraph: Map<string, Set<Pair<string>>>;
+   private readonly markingGraph: Map<string, Set<Pair<string>>>;
 
 
   //---------------------------------------------------------------------------

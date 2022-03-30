@@ -22,8 +22,8 @@ export class SolverService {
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  private arrayService: ArrayService;
-  private starService: StarService;
+  private readonly arrayService: ArrayService;
+  private readonly starService: StarService;
 
 
   //---------------------------------------------------------------------------
@@ -40,7 +40,7 @@ export class SolverService {
   //		Methods
   //---------------------------------------------------------------------------
   public randomSolution(marked: Set<string> = null): Array<string> {
-    const start = this.arrayService.randomChoice(Array.from(this.starService.getPaths().keys()));
+    const start = this.selectRandomNode();
     const markings = [];
     let markedFromSolution = new Set(marked);
     let candidates = [start];
@@ -49,7 +49,7 @@ export class SolverService {
       candidates = this.arrayService.shuffle(candidates);
       let currentTarget = candidates.pop();
 
-      let validEdges: Array<Pair<string>> = this.buildValidEdges(this.starService.getPaths(), currentTarget, markedFromSolution);
+      let validEdges: Array<Pair<string>> = this.buildValidEdges(currentTarget, markedFromSolution);
 
       let possibleMarkings = [];
       for (let pair of validEdges) {
@@ -73,10 +73,16 @@ export class SolverService {
     return markings;
   }
 
-  private buildValidEdges(markingGraph: Map<string, Set<Pair<string>>>, node: string, marked: Set<string>) {
+  private selectRandomNode() {
+    const nodes = Array.from(this.starService.getPaths().keys());
+
+    return this.arrayService.randomChoice(nodes);
+  }
+
+  private buildValidEdges(node: string, marked: Set<string>) {
     const validEdges: Array<Pair<string>> = []; 
 
-    for (let pair of markingGraph.get(node)) {
+    for (let pair of this.starService.getPathFrom(node)) {
       let destination = pair.getSecond();
 
       if (!marked.has(destination)) {

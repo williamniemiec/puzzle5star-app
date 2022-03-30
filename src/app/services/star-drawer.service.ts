@@ -19,12 +19,12 @@ export class StarDrawerService {
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
+  private readonly angle: number;
   private dx: number;
   private dy: number;
   private radius: number;
   private width: number;
   private color: string;
-  private angle: number;
 
 
   //---------------------------------------------------------------------------
@@ -32,12 +32,12 @@ export class StarDrawerService {
   //---------------------------------------------------------------------------
   constructor(
   ) {
+    this.angle = 10;
     this.dx = 0;
     this.dy = 0;
     this.radius = 100;
     this.width = 3;
     this.color = '#f7c11e';
-    this.angle = 10;
   }
 
 
