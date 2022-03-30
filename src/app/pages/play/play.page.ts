@@ -5,10 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { StarNode } from './../../models/star-node.model';
-import { StarDrawerService } from '../../services/star-drawer.service';
-import { CountdownConfig } from './../../../../node_modules/ngx-countdown/interfaces.d';
-import { GameService } from '../../services/game.service';
 import {
   Component,
   ElementRef,
@@ -18,10 +14,14 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { LevelSelectionPage } from 'src/app/components/level-selection/level-selection.page';
 import { CountdownComponent } from 'ngx-countdown';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
+import { CountdownConfig } from '../../../../node_modules/ngx-countdown/interfaces.d';
+import { StarDrawerService } from '../../services/star-drawer.service';
+import { GameService } from '../../services/game.service';
+import { LevelSelectionPage } from '../../components/level-selection/level-selection.page';
+import { StarNode } from '../../models/star-node.model';
 import { GameSettings } from "../../models/game-settings.model";
 
 
@@ -38,8 +38,6 @@ export class PlayPage implements AfterViewInit, OnInit {
   //---------------------------------------------------------------------------
   //		Attributes
   //---------------------------------------------------------------------------
-  @ViewChild('canvas') canvasEl: ElementRef;
-  @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
   public message: string;
   public hasTimer: boolean;
   public config: CountdownConfig;
@@ -50,7 +48,14 @@ export class PlayPage implements AfterViewInit, OnInit {
   public PLAY: string;
   public RESET: string;
   public SOLVE: string;
-  private _CANVAS: any;
+  
+  @ViewChild('canvas') 
+  private canvasEl: ElementRef;
+  
+  @ViewChild('cd', { static: false }) 
+  private countdown: CountdownComponent;
+  
+  private canvasElement: any;
   private WON_GAME: string;
   private YOU_LOSE: string;
   private TIME_EXPIRED: string;
@@ -76,14 +81,18 @@ export class PlayPage implements AfterViewInit, OnInit {
     this.solveEnabled = true;
   }
 
+
+  //---------------------------------------------------------------------------
+  //		Methods
+  //---------------------------------------------------------------------------
   ngOnInit(): void {
     this.nodes = this.gameService.getNodes();
   }
 
   ngAfterViewInit() {
-    this._CANVAS = this.canvasEl.nativeElement;
-    this._CANVAS.width = 200;
-    this._CANVAS.height = 200;
+    this.canvasElement = this.canvasEl.nativeElement;
+    this.canvasElement.width = 200;
+    this.canvasElement.height = 200;
     this.renderText();
     this.loadLevel();
     this.drawStar();
@@ -117,30 +126,63 @@ export class PlayPage implements AfterViewInit, OnInit {
   }
 
   private loadLevel(): void {
-    const level = this.routeParams.snapshot.params.level;
-    const gameConfig: GameSettings = this.gameService.newGame(level);
+    const level: string = this.getSelectedLevel();
+    const gameConfig: GameSettings = this.startNewGame(level);
     
+    this.setUpGame(gameConfig);
+  }
+
+  private getSelectedLevel(): string {
+    return this.routeParams.snapshot.params.level;
+  }
+
+  private startNewGame(level: string): GameSettings {
+    const gameConfig: GameSettings = this.gameService.newGame(level);
+
     this.nodes = this.gameService.getNodes();
 
-    this.translate.get(gameConfig.message).subscribe((res: string) => {
-      this.message = res;
-    });
-    this.hasTimer = gameConfig.hasTimer;
-    this.solveEnabled = gameConfig.solverEnabled;
+    return gameConfig;
+  }
+
+  private setUpGame(gameConfig: GameSettings) {
+    this.setUpGameMessage(gameConfig);
+    this.setUpGameTimer(gameConfig);
+    this.setUpGameSolver(gameConfig);
 
     if (gameConfig.hasTimer) {
-      this.hasTimer = true;
-      this.config = { format: `mm:ss`, leftTime: gameConfig.timer};
-      this.countdown.begin();
-
-      this.progressBarUpdate = setInterval(() => {
-        this.p_bar_value = this.countdown.left / (1000 * this.config.leftTime);
-      }, 1000);
+      this.setUpTimer(gameConfig);
     }
   }
 
+  private setUpGameMessage(gameConfig: GameSettings) {
+    this.translate.get(gameConfig.message).subscribe((res: string) => {
+      this.message = res;
+    });
+  }
+
+  private setUpGameTimer(gameConfig: GameSettings) {
+    this.hasTimer = gameConfig.hasTimer;
+  }
+
+  private setUpGameSolver(gameConfig: GameSettings) {
+    this.solveEnabled = gameConfig.solverEnabled;
+  }
+
+  private setUpTimer(gameConfig: GameSettings) {
+    this.hasTimer = true;
+    this.config = { format: `mm:ss`, leftTime: gameConfig.timer };
+    this.countdown.begin();
+    this.setUpProgressBar();
+  }  
+
+  private setUpProgressBar() {
+    this.progressBarUpdate = setInterval(() => {
+      this.p_bar_value = this.countdown.left / (1000 * this.config.leftTime);
+    }, 1000);
+  }
+
   private drawStar(): void {
-    const context = this._CANVAS.getContext('2d');
+    const context = this.canvasElement.getContext('2d');
 
     this.starDrawerService.drawStar(context);
   }
@@ -152,36 +194,48 @@ export class PlayPage implements AfterViewInit, OnInit {
       this.message = this.WON_GAME;
     }
     
+    this.updateNodes();
+    this.solveEnabled = false;
+  }
+
+  private updateNodes() {
     for (let label of this.nodes.keys()) {
       this.nodes.get(label).available = this.gameService.isAvailable(label);
       this.nodes.get(label).selected = this.gameService.isNodeSelected(label);
       this.nodes.get(label).marked = this.gameService.isMarked(label);
     }
-
-    this.solveEnabled = false;
   }
 
   public handleSolve(): void {
+    this.stopTimer();
+    this.displaySolution(this.gameService.solve());
+  }
+
+  private stopTimer() {
     this.hasTimer = false;
     clearInterval(this.progressBarUpdate);
-    
-    const solution = this.gameService.solve();
-    
+  }
+
+  private displaySolution(solution: string[]) {
     this.message = this.message.concat('\n\n');
 
     for (let i = 0; i < solution.length; i++) {
-      this.message = this.message.concat(`${i+1}.  `);
+      this.message = this.message.concat(`${i + 1}.  `);
       this.message = this.message.concat(solution[i]);
       this.message = this.message.concat('\n');
     }
   }
 
   public handleReset(): void {
+    this.reloadPage();
+  }
+
+  private reloadPage() {
     this.presentModal().then((modalDataResponse) => {
       if (modalDataResponse.data != null) {
         this.router.navigate(['/'], { replaceUrl: true }).then(() => {
-          this.router.navigate(['/play/', modalDataResponse.data], { replaceUrl: true })
-        })
+          this.router.navigate(['/play/', modalDataResponse.data], { replaceUrl: true });
+        });
       }
     });
   }
@@ -204,12 +258,14 @@ export class PlayPage implements AfterViewInit, OnInit {
     }
 
     if (event.action === 'done') {
-      clearInterval(this.progressBarUpdate);
-      this.p_bar_value = 0;
-      this.presentAlert().then(role => {
-        this.router.navigate(['/'], { replaceUrl: true })
-      })
+      this.eraseProgressBar();
+      this.presentAlert().then(_ => this.redirectToHomePage());
     }
+  }
+
+  private eraseProgressBar() {
+    clearInterval(this.progressBarUpdate);
+    this.p_bar_value = 0;
   }
 
   private async presentAlert() {
@@ -223,5 +279,9 @@ export class PlayPage implements AfterViewInit, OnInit {
     await alert.present();
 
     return alert.onDidDismiss();
+  }
+
+  private redirectToHomePage() {
+    this.router.navigate(['/'], { replaceUrl: true });
   }
 }
