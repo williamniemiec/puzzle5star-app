@@ -1,12 +1,12 @@
-import { StarDrawerService } from '../../services/star-drawer.service';
-import { GameService } from '../../services/game.service';
-import { PlayPageRoutingModule } from './play-routing.module';
 import { NgModule } from '@angular/core';
-import { PlayPage} from './play.page';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CountdownModule } from 'ngx-countdown';
 import { AlertController } from '@ionic/angular';
+import { PlayPageRoutingModule } from './play-routing.module';
+import { PlayPage} from './play.page';
+import StarDrawerService from '../../services/star-drawer.service';
+import GameService from '../../services/game.service';
 
 
 /**

@@ -15,7 +15,7 @@ import Pair from '../models/pair.model';
 @Injectable(
   { providedIn: 'root' }
 )
-export class StarService {
+export default class StarService {
 
   //---------------------------------------------------------------------------
   //		Attributes

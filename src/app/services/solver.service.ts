@@ -7,8 +7,8 @@
 
 import { Injectable } from "@angular/core";
 import Pair from '../models/pair.model';
-import { StarService } from './star.service';
-import { ArrayService } from './array.service';
+import StarService from './star.service';
+import ArrayService from './array.service';
 
 
 /**
@@ -17,7 +17,7 @@ import { ArrayService } from './array.service';
 @Injectable(
   { providedIn: 'root' }
 )
-export class SolverService {
+export default class SolverService {
 
   //---------------------------------------------------------------------------
   //		Attributes

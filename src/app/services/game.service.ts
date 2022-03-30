@@ -6,12 +6,12 @@
  */
 
 import { Injectable } from "@angular/core";
-import { StarNode } from '../models/star-node.model';
+import LevelService from './level.service';
+import SolverService from './solver.service';
+import StarService from './star.service';
+import StarNode from '../models/star-node.model';
 import Pair from '../models/pair.model';
-import { GameSettings } from "../models/game-settings.model";
-import { LevelService } from './level.service';
-import { SolverService } from './solver.service';
-import { StarService } from './star.service';
+import GameSettings from "../models/game-settings.model";
 
 
 /**
@@ -20,7 +20,7 @@ import { StarService } from './star.service';
 @Injectable(
   { providedIn: 'root' }
 )
-export class GameService {
+export default class GameService {
   
   //---------------------------------------------------------------------------
   //		Attributes

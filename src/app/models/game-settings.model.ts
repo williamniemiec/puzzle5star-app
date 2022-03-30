@@ -8,7 +8,7 @@
 /**
  * Responsible for defining game settings.
  */
-export interface GameSettings {
+export default interface GameSettings {
 
   level: string;
   hasTimer: boolean;

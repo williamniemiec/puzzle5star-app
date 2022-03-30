@@ -6,7 +6,7 @@
  */
 
 import { Injectable } from "@angular/core";
-import { GameSettings } from "../models/game-settings.model";
+import GameSettings from "../models/game-settings.model";
 
 
 /**
@@ -15,7 +15,7 @@ import { GameSettings } from "../models/game-settings.model";
 @Injectable(
   { providedIn: 'root' }
 )
-export class LevelService {
+export default class LevelService {
   
   //---------------------------------------------------------------------------
   //		Attributes

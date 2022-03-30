@@ -8,7 +8,7 @@
 /**
  * Responsible for defining the state of a star node.
  */
-export interface StarNode {
+export default interface StarNode {
   
   marked: boolean, 
   available: boolean, 

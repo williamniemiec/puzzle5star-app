@@ -18,11 +18,11 @@ import { CountdownComponent } from 'ngx-countdown';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
 import { CountdownConfig } from '../../../../node_modules/ngx-countdown/interfaces.d';
-import { StarDrawerService } from '../../services/star-drawer.service';
-import { GameService } from '../../services/game.service';
+import StarDrawerService from '../../services/star-drawer.service';
+import GameService from '../../services/game.service';
 import { LevelSelectionPage } from '../../components/level-selection/level-selection.page';
-import { StarNode } from '../../models/star-node.model';
-import { GameSettings } from "../../models/game-settings.model";
+import StarNode from '../../models/star-node.model';
+import GameSettings from "../../models/game-settings.model";
 
 
 /**
