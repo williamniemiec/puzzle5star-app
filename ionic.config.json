@@ -1,7 +1,8 @@
 {
   "name": "puzzle-5star",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

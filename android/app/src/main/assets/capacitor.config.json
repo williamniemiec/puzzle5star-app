@@ -1,0 +1,20 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "puzzle-5star",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"cordova": {
+		"preferences": {
+			"android-minSdkVersion": "22",
+			"android-targetSdkVersion": "30",
+			"android-compileSdkVersion ": "23",
+			"ScrollEnabled": "false",
+			"BackupWebStorage": "none",
+			"SplashMaintainAspectRatio": "true",
+			"FadeSplashScreenDuration": "300",
+			"SplashShowOnlyFirstTime": "false",
+			"SplashScreen": "screen",
+			"SplashScreenDelay": "3000"
+		}
+	}
+}

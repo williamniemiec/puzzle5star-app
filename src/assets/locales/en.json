@@ -15,7 +15,7 @@
     "OK": "Ok",
     "PUZZLE_DESCRIPTION": "The puzzle consists of marking arrival points from a starting point freely chosen by a user, among the 10 available, to arrive in a straight line at another point, passing through a point (marked or not). Evidently, each route starts from an unmarked starting point to arrive at an unmarked one that will be marked at the end of the route.",
     "HOW_TO_PLAY": "How to play",
-    "SCREENS_DESCRIPTION": "On the left, the game's initial configuration, with all available nodes; in the middle, the game configuration when selecting node \"A\"; on the right, the configuration after having selected node \"D\" (starting from the middle configuration) and having selected node \"A\" again.",
+    "SCREENS_DESCRIPTION": "The first, the game's initial configuration, with all available nodes; in the middle, the game configuration when selecting node \"A\"; the last, the configuration after having selected node \"D\" (starting from the middle configuration) and having selected node \"A\" again.",
     "AVAILABLE": "Available",
     "UNAVAILABLE": "Unavailable",
     "SELECTED": "Selected",

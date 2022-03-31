@@ -1,21 +1,26 @@
+.container {
+  height: auto;
+}
+
 .screens {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   margin: 20px 0;
 }
 
 .screens img {
   height: 350px;
-  margin: 0 10px;
+  margin: 10px 10px;
 }
 
 .legend {
   display: flex;
   align-items: center;
   margin: 20px 0;
+  flex-wrap: wrap;
 }
 
 .legend-item {
