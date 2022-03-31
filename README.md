@@ -33,7 +33,7 @@ Special thanks to [Renan Magagnin](https://github.com/renanmagagnin) for develop
 ## ❓ How to use
 The puzzle consists of marking arrival points from a starting point freely chosen by a user, among the 10 available, to arrive in a straight line at another point, passing through a point (marked or not). Evidently, each route starts from an unmarked starting point to arrive at an unmarked one that will be marked at the end of the route.
 
-<div style="display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap">
+<div align='center' style="display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap">
 
 <img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen5.png" alt="image 5" />
 
