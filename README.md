@@ -65,7 +65,7 @@ Type in your terminal:
 
 ## 🖼 Gallery
 
-<div style="display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap">
+<div align='center' style="display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap">
 
 <img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen1.png" alt="image 1" />
 
@@ -89,7 +89,7 @@ Type in your terminal:
 Details about each version are documented in the [releases section](https://github.com/williamniemiec/puzzle5star-app/releases).
 
 ## 🗺 Project structure
-![architecture](https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/design/architecture.jpg)
+![architecture](https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/design/architecture.png)
 
 ## 📁 Files
 
