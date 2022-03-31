@@ -43,9 +43,9 @@ The puzzle consists of marking arrival points from a starting point freely chose
 
 </div>
 
-<span style="font-style: italic; font-size: 12px; display: flex; text-align: center; line-height: 18px;">
+<p align='center'>
 	The first, the game's initial configuration, with all available nodes; in the middle, the game configuration when selecting node "A"; the last, the configuration after having selected node "D" (starting from the middle configuration) and having selected node "A" again.
-</span>
+</p>
 
 ## ⚠ Warnings
 The hosting service Heroku may have a certain delay (~ 1 min) for uploading the application so the loading of the website may have a certain delay. 
