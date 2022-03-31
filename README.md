@@ -30,6 +30,22 @@ At last, puzzle5star is an application built with Ionic Framework along with Ang
 ## Acknowledgements
 Special thanks to [Renan Magagnin](https://github.com/renanmagagnin) for developing the solver.
 
+## ❓ How to use
+The puzzle consists of marking arrival points from a starting point freely chosen by a user, among the 10 available, to arrive in a straight line at another point, passing through a point (marked or not). Evidently, each route starts from an unmarked starting point to arrive at an unmarked one that will be marked at the end of the route.
+
+<div style="display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap">
+
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen5.png" alt="image 5" />
+
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen6.png" alt="image 6" />
+
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen7.png" alt="image 7" />
+
+</div>
+
+<span style="font-style: italic; font-size: 12px; display: flex; text-align: center; line-height: 18px;">
+	The first, the game's initial configuration, with all available nodes; in the middle, the game configuration when selecting node "A"; the last, the configuration after having selected node "D" (starting from the middle configuration) and having selected node "A" again.
+</span>
 
 ## ⚠ Warnings
 The hosting service Heroku may have a certain delay (~ 1 min) for uploading the application so the loading of the website may have a certain delay. 
@@ -59,11 +75,13 @@ Type in your terminal:
 
 <img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen4.png" alt="image 4" />
 
-<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen5.png" alt="image 5" />
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen8.png" alt="image 8" />
 
-<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen6.png" alt="image 6" />
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen9.png" alt="image 9" />
 
-<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen7.png" alt="image 7" />
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen10.png" alt="image 10" />
+
+<img height=400 src="https://raw.githubusercontent.com/williamniemiec/puzzle5star-app/master/docs/images/screens/screen11.png" alt="image 11" />
 
 </div>
 
