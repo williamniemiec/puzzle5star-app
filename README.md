@@ -14,7 +14,7 @@
 
 <div height=100 align='center'>
   <a href='https://play.google.com/store/apps/details?id=wniemiec.app.puzzle5star'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=172 align='center' /></a>
-    <a href='https://wniemiec-web-puzzle5star.herokuapp.com/'><img alt='Deploy' src='https://www.herokucdn.com/deploy/button.svg' width=200 align='center' /></a>
+    <a href='https://wniemiec-app-puzzle5star.herokuapp.com/'><img alt='Deploy' src='https://www.herokucdn.com/deploy/button.svg' width=200 align='center' /></a>
   
 </div>
 
@@ -25,7 +25,7 @@ Puzzle is a genre of video game or some video games that focuses on solving puzz
 
 In this puzzle, there is a five-pointed star with 10 points that are formed by the encounters and intersections of line segments. Five pointed star puzzle consists of, from a starting point freely chosen among the 10 available, to mark another point distant from this point in a straight line (both points must not be marked yet). The objective is to mark as many points as possible (which are 9). It is worth mentioning that the waypoint is independent of marking. This is a problem that is not comprehensively available on the internet, and this is the main motivation of this work.
 
-At last, puzzle5star is an application built with Ionic Framework along with Angular. You can interact with the project through the Heroku platform ([click here to access](https://wniemiec-web-puzzle5star.herokuapp.com/)).
+At last, puzzle5star is an application built with Ionic Framework along with Angular. You can interact with the project through the Heroku platform ([click here to access](https://wniemiec-app-puzzle5star.herokuapp.com/)).
 
 ## Acknowledgements
 Special thanks to [Renan Magagnin](https://github.com/renanmagagnin) for developing the solver.
