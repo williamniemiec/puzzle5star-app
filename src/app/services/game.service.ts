@@ -173,10 +173,10 @@ export default class GameService {
 
   private handleAnotherNodeSelection(label: string) {
     let hasWonGame: boolean = false;
-    const availableNodes = this.getAvailableOptionsForNodes(this.selectedNodes[0], this.selectedNodes[1]);
+    const availableNodes = this.getAvailableOptionsForNodes(this.selectedNodes[0], label);
     
-    this.updateAvailableNodes(availableNodes);
     this.selectNode(label);
+    this.updateAvailableNodes(availableNodes);
 
     if (this.isLastNodeSelection()) {
       this.endSelection();
